@@ -442,7 +442,7 @@
   ScriptInputsDefault:
     tableName: true
     storageBucket: true
-    debugMode: true
+    printDbInfoOnStart: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
@@ -452,8 +452,8 @@
       tableName: test_agent_info
       storageBucket: monument-images
       monumentImageDisplay: !<reference.Image> 39fd509d-28df-4a13-8152-125be09a81ed
-      debugMode: true
-      printDbInfoOnStart: true
+      debugMode: false
+      printDbInfoOnStart: false
   ScriptTypes:
     "":
       {}
@@ -1587,7 +1587,7 @@
   ScriptInputs:
     "":
       lerpIntensity: 0.300000
-      distanceToUser: !<float> 41.000000
+      distanceToUser: !<float> 35.000000
       positionOffset: !<Vec3> {x: 0.000000, y: -8.000000, z: -100.000000}
       returnToViewSpeed: 0.200000
       geminiAssistant: !<reference.ScriptComponent> ecaa9078-d340-402f-be53-18ab9bff560f
@@ -3219,7 +3219,7 @@
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 30.776276, z: 0.000000}
+    Position: {x: 0.000000, y: 34.243958, z: 0.000000}
     Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
     Scale: {x: 32.000000, y: 32.000000, z: 32.000000}
     HasSegmentScaleCompensation: false
@@ -3632,12 +3632,12 @@
   ShowEditingPreview: true
   TouchHandler: !<reference> 00000000-0000-0000-0000-000000000000
   SizeToFit: false
-  FontSize: 35
+  FontSize: 48
   Font: !<reference> 00000000-0000-0000-0000-000000000000
   LayoutRect:
-    left: -7.000000
+    left: -10.000000
     bottom: -10.000000
-    right: 7.000000
+    right: 10.000000
     top: 10.000000
   OverflowVertical: Overflow
   OverflowHorizontal: Wrap
@@ -3660,7 +3660,7 @@
       TileCount: 5.000000
       TileZone: Rect
       TextureStretch: FitWidth
-    Size: 0.060000
+    Size: 0.100000
   Dropshadow: !<DropshadowSettings>
     Enabled: false
     Fill: !<TextFill>

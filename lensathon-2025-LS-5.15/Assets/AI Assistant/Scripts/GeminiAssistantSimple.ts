@@ -118,6 +118,8 @@ When analyzing the camera feed, look for distinctive architectural features, scu
     state: "idle" | "listening" | "talking";
   }>();
 
+  public greetingCompleteEvent: Event<void> = new Event<void>();
+
   private currentState: "idle" | "listening" | "talking" = "idle";
 
   /**
@@ -568,6 +570,9 @@ When analyzing the camera feed, look for distinctive architectural features, scu
     
     this.GeminiLive.send(greetingMessage);
     print("✅ Greeting message sent to AI");
+    
+    // Notify that greeting is complete so monument context can be sent
+    this.greetingCompleteEvent.invoke();
   }
 
   /**

@@ -48,6 +48,13 @@ export class MonumentDataHandler extends BaseScriptComponent {
 
   onAwake() {
     print("[MonumentDataHandler] 🚀 Script awakened - starting initialization");
+    
+    // Hide image by default
+    if (this.monumentImageDisplay) {
+      this.monumentImageDisplay.enabled = false;
+      this.log("🖼️ Monument image display disabled by default");
+    }
+    
     this.createEvent("OnStartEvent").bind(() => {
       this.onStart();
     });
@@ -75,6 +82,15 @@ export class MonumentDataHandler extends BaseScriptComponent {
       this.geminiAssistant.functionCallEvent.add((data) => {
         this.handleFunctionCall(data.name, data.args);
       });
+      
+      // Listen for AI state changes to hide image when user speaks
+      this.geminiAssistant.stateChangeEvent.add((data) => {
+        if (data.state === "listening" && this.monumentImageDisplay) {
+          this.monumentImageDisplay.enabled = false;
+          this.log("🔇 User speaking - hiding monument image");
+        }
+      });
+      
       this.log("✅ MonumentDataHandler connected to Gemini Assistant");
     }
     
@@ -83,8 +99,14 @@ export class MonumentDataHandler extends BaseScriptComponent {
       await this.printAllMonumentsInfo();
     }
     
-    // Fetch all monuments and send as context to AI
-    await this.loadMonumentsAsContext();
+    // Wait for AI greeting to complete before sending monument context
+    if (this.geminiAssistant) {
+      this.geminiAssistant.greetingCompleteEvent.add(async () => {
+        this.log("👋 Greeting complete - now sending monument context");
+        // Fetch all monuments and send as context to AI
+        await this.loadMonumentsAsContext();
+      });
+    }
     
     print("[MonumentDataHandler] ✅ Initialization complete");
   }
@@ -449,10 +471,14 @@ export class MonumentDataHandler extends BaseScriptComponent {
           (texture: Texture) => {
             // Apply texture to image display
             this.monumentImageDisplay.mainPass.baseTex = texture;
+            // Enable the image display
+            this.monumentImageDisplay.enabled = true;
             this.log("✅ Monument image loaded and displayed");
             resolve();
           },
           (error: string) => {
+            // Hide image on error
+            this.monumentImageDisplay.enabled = false;
             this.log(`❌ Error loading monument image: ${error}`);
             reject(error);
           }

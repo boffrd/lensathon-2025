@@ -610,7 +610,8 @@ export class SphereController extends BaseScriptComponent {
     if (data.completed) {
       this.worldSpaceText.text = data.text;
       this.screenSpaceText.text = data.text;
-      print(`💬 Text displayed: ${data.text.substring(0, 50)}...`);
+      // Print complete text only when turn is complete
+      print(`💬 Complete text: ${data.text}`);
     } else {
       this.worldSpaceText.text += data.text;
       this.screenSpaceText.text += data.text;
