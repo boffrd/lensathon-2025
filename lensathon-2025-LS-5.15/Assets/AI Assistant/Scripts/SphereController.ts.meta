@@ -1,0 +1,125 @@
+- !<AssetImportMetadata/a82162e9-0723-ae92-f85b-bb7c6d79e7c6>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 2e6f8804-4c5f-4f4c-9507-fd7b54576469
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 2e6f8804-4c5f-4f4c-9507-fd7b54576469
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 7cf12522-0e08-4afb-a515-bedc91a1a45a
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/7cf12522-0e08-4afb-a515-bedc91a1a45a>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: a1facbc3-9aa1-4da1-a556-48d82522b6d0
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    allowUserInteraction: false
+    audioDecayRate: false
+    audioReactiveMultiplier: false
+    audioSmoothingFactor: false
+    baseWidth: false
+    closeButtonInteractable: false
+    closeObj: false
+    distanceToUser: false
+    geminiAssistant: false
+    hoverMat: false
+    lerpIntensity: false
+    orbInteractableObj: false
+    orbObject: false
+    orbScreenPosition: false
+    orbVisualParent: false
+    positionOffset: false
+    returnToViewSpeed: false
+    screenSpaceText: false
+    uiParent: false
+    worldSpaceText: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - lerpIntensity: 0.100000
+      distanceToUser: !<float> 80.000000
+      positionOffset: !<Vec3> {x: -15.000000, y: -10.000000, z: 0.000000}
+      returnToViewSpeed: 0.300000
+      geminiAssistant: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      audioReactiveMultiplier: !<float> 2.000000
+      audioSmoothingFactor: 0.200000
+      baseWidth: !<float> 1.000000
+      audioDecayRate: 0.100000
+      allowUserInteraction: false
+      hoverMat: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      orbInteractableObj: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      orbObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      orbVisualParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      orbScreenPosition: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      closeObj: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      closeButtonInteractable: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      worldSpaceText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      screenSpaceText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      uiParent: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"label", "label":"Manages the UI and hand intereactions for the AI assistant"}'
+    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"group_start", "label":"Orb Positioning Settings"}'
+    - '// @input float lerpIntensity = 0.15 {"widget":"slider", "min":0.01, "max":1, "step":0.01}'
+    - '// @ui {"widget":"label", "label":"Controls how smoothly the orb follows the user (lower = smoother)"}'
+    - '// @input float distanceToUser = 60 {"widget":"slider", "min":30, "max":200, "step":1}'
+    - '// @ui {"widget":"label", "label":"Distance from user to the orb"}'
+    - "// @input vec3 positionOffset = {20,5,0}"
+    - '// @ui {"widget":"label", "label":"Position offset relative to user (right, up, forward)"}'
+    - '// @input float returnToViewSpeed = 0.3 {"widget":"slider", "min":0.01, "max":0.5, "step":0.01}'
+    - '// @ui {"widget":"label", "label":"How quickly orb returns to view when out of FOV"}'
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"group_start", "label":"Audio Reactivity"}'
+    - // @input Component.ScriptComponent geminiAssistant
+    - '// @ui {"widget":"label", "label":"GeminiAssistant reference for audio reactivity"}'
+    - '// @input float audioReactiveMultiplier = 2 {"widget":"slider", "min":0.1, "max":5, "step":0.1}'
+    - '// @ui {"widget":"label", "label":"Multiplier for audio reactive width effect"}'
+    - '// @input float audioSmoothingFactor = 0.2 {"widget":"slider", "min":0.01, "max":1, "step":0.01}'
+    - '// @ui {"widget":"label", "label":"Smoothing factor for audio reactive animation"}'
+    - '// @input float baseWidth = 1 {"widget":"slider", "min":0.1, "max":2, "step":0.1}'
+    - '// @ui {"widget":"label", "label":"Base width value when no audio is playing"}'
+    - '// @input float audioDecayRate = 0.1 {"widget":"slider", "min":0.01, "max":0.5, "step":0.01}'
+    - '// @ui {"widget":"label", "label":"How fast the width returns to base when audio stops"}'
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"group_start", "label":"Interaction Settings"}'
+    - // @input bool allowUserInteraction
+    - '// @ui {"widget":"label", "label":"Allow user to click/pinch to minimize the orb"}'
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"group_start", "label":"Materials & Objects"}'
+    - // @input Asset.Material hoverMat
+    - // @input SceneObject orbInteractableObj
+    - // @input SceneObject orbObject
+    - // @input SceneObject orbVisualParent
+    - // @input SceneObject orbScreenPosition
+    - // @input SceneObject closeObj
+    - // @input SceneObject closeButtonInteractable
+    - // @input Component.Text worldSpaceText
+    - // @input Component.Text screenSpaceText
+    - // @input SceneObject uiParent
+    - '// @ui {"widget":"group_end"}'

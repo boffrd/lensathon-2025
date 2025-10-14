@@ -1,0 +1,62 @@
+- !<AssetImportMetadata/cb85c18b-7195-4c11-b8b1-50193cbe270a>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> d7c2782d-29f0-4e82-9ba5-a2fe2d390c57
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> d7c2782d-29f0-4e82-9ba5-a2fe2d390c57
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> e748129b-de0d-4767-92f7-74442b2bff3f
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/e748129b-de0d-4767-92f7-74442b2bff3f>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 54f8eaea-0396-45f7-b166-244ded323345
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    geminiAssistant: false
+    hintText: false
+    hintTitle: false
+    sphereController: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - geminiAssistant: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      sphereController: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
+      hintTitle: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      hintText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"label", "label":"Connects the AI Assistant to the Sphere Controller UI"}'
+    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"group_start", "label":"Assistants"}'
+    - '// @ui {"widget":"label", "label":"Customize the voice and behavior of the assistant on the Gemini component."}'
+    - // @input AssignableType geminiAssistant
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"group_start", "label":"UI Elements"}'
+    - // @input AssignableType_1 sphereController
+    - // @input Component.Text hintTitle
+    - // @input Component.Text hintText
+    - '// @ui {"widget":"group_end"}'
