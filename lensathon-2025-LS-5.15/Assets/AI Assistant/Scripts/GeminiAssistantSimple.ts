@@ -9,7 +9,7 @@ import Event from "SpectaclesInteractionKit.lspkg/Utils/Event";
 import { GeminiTypes } from "RemoteServiceGateway.lspkg/HostedExternal/GeminiTypes";
 import { MicrophoneRecorder } from "RemoteServiceGateway.lspkg/Helpers/MicrophoneRecorder";
 import { VideoController } from "RemoteServiceGateway.lspkg/Helpers/VideoController";
-import { setTimeout } from "SpectaclesInteractionKit.lspkg/Utils/FunctionTimingUtils";
+import { setTimeout, clearTimeout, CancelToken } from "SpectaclesInteractionKit.lspkg/Utils/FunctionTimingUtils";
 
 @component
 export class GeminiAssistant extends BaseScriptComponent {
@@ -95,7 +95,8 @@ When analyzing the camera feed, look for distinctive architectural features, scu
 
   private lastAudioIntensity: number = 0;
   private lastAudioTime: number = 0;
-  private silenceCheckEvent: SceneEvent | null = null;
+  private silenceCheckToken: CancelToken | null = null;
+  private isMonitoring: boolean = false;
 
   public updateTextEvent: Event<{ text: string; completed: boolean }> =
     new Event<{ text: string; completed: boolean }>();
@@ -167,7 +168,9 @@ When analyzing the camera feed, look for distinctive architectural features, scu
       if (message.setupComplete) {
         message = message as GeminiTypes.Live.SetupCompleteEvent;
         print("Setup complete");
+        // IMPORTANT: Setup inputs BEFORE starting streaming so audio callbacks are ready
         this.setupInputs();
+        print("✅ Audio/video inputs configured");
         // Auto-start streaming for travel assistant
         print("Auto-starting audio/video streaming for travel assistant");
         this.streamData(true);
@@ -269,9 +272,10 @@ When analyzing the camera feed, look for distinctive architectural features, scu
 
       this.microphoneRecorder.startRecording();
       print("🎤 Microphone recording started - speak to the assistant!");
-      // Start with idle state, will switch to listening when audio detected
-      this.setState("idle");
+      // Start monitoring and set to idle (will switch to listening when audio detected)
       this.startSilenceMonitoring();
+      this.setState("idle");
+      print(`🔊 Audio monitoring started - threshold: ${this.audioThreshold}`);
     } else {
       print("⏹️ Stopping audio/video streaming...");
       if (this.haveVideoInput) {
@@ -289,18 +293,26 @@ When analyzing the camera feed, look for distinctive architectural features, scu
    * Calculate audio intensity from audio frame to detect speech
    */
   private calculateAudioIntensity(audioFrame: Float32Array): void {
+    // Only process if we're monitoring
+    if (!this.isMonitoring) {
+      return;
+    }
+    
     // Calculate RMS (Root Mean Square) of audio samples
+    // Sample only every 10th frame to reduce processing
     let sum = 0;
-    for (let i = 0; i < audioFrame.length; i++) {
+    const step = 10;
+    for (let i = 0; i < audioFrame.length; i += step) {
       sum += audioFrame[i] * audioFrame[i];
     }
-    const rms = Math.sqrt(sum / audioFrame.length);
+    const rms = Math.sqrt(sum / (audioFrame.length / step));
     this.lastAudioIntensity = rms;
     
     // If audio is above threshold and not currently talking, switch to listening
     if (rms > this.audioThreshold && this.currentState !== "talking") {
       this.lastAudioTime = getTime();
       if (this.currentState === "idle") {
+        print(`🔊 Audio detected! RMS: ${rms.toFixed(4)} > Threshold: ${this.audioThreshold}`);
         this.setState("listening");
       }
     }
@@ -308,16 +320,28 @@ When analyzing the camera feed, look for distinctive architectural features, scu
 
   /**
    * Start monitoring for silence to return to idle state
+   * Uses delayed callbacks instead of UpdateEvent to reduce CPU load
    */
   private startSilenceMonitoring(): void {
-    this.lastAudioTime = getTime();
-    
     // Stop existing monitoring if any
     this.stopSilenceMonitoring();
     
-    // Check every frame if we should go back to idle
-    this.silenceCheckEvent = this.createEvent("UpdateEvent");
-    this.silenceCheckEvent.bind(() => {
+    this.lastAudioTime = getTime();
+    this.isMonitoring = true;
+    
+    print(`🎧 Silence monitoring started (isMonitoring: ${this.isMonitoring})`);
+    
+    // Check periodically (every 0.5 seconds) instead of every frame
+    this.scheduleNextSilenceCheck();
+  }
+
+  /**
+   * Schedule the next silence check
+   */
+  private scheduleNextSilenceCheck(): void {
+    if (!this.isMonitoring) return;
+    
+    this.silenceCheckToken = setTimeout(() => {
       const currentTime = getTime();
       const silenceDuration = currentTime - this.lastAudioTime;
       
@@ -328,20 +352,28 @@ When analyzing the camera feed, look for distinctive architectural features, scu
       ) {
         this.setState("idle");
       }
-    });
+      
+      // Schedule the next check if still monitoring
+      if (this.isMonitoring) {
+        this.scheduleNextSilenceCheck();
+      }
+    }, 500); // Check every 500ms instead of every frame
   }
 
   /**
    * Stop monitoring for silence
    */
   private stopSilenceMonitoring(): void {
-    if (this.silenceCheckEvent) {
-      this.silenceCheckEvent.enabled = false;
-      this.silenceCheckEvent = null;
+    this.isMonitoring = false;
+    if (this.silenceCheckToken) {
+      clearTimeout(this.silenceCheckToken);
+      this.silenceCheckToken = null;
     }
   }
 
   private setupInputs() {
+    print("🔧 Setting up audio/video input callbacks...");
+    
     this.audioProcessor.onAudioChunkReady.add((encodedAudioChunk) => {
       const message = {
         realtime_input: {
@@ -357,7 +389,15 @@ When analyzing the camera feed, look for distinctive architectural features, scu
     });
 
     // Configure the microphone
+    let frameCount = 0;
     this.microphoneRecorder.onAudioFrame.add((audioFrame) => {
+      frameCount++;
+      
+      // Debug first few frames
+      if (frameCount <= 3) {
+        print(`🎙️ Audio frame ${frameCount} received, length: ${audioFrame.length}, monitoring: ${this.isMonitoring}`);
+      }
+      
       this.audioProcessor.processFrame(audioFrame);
       
       // Calculate audio intensity for idle/listening detection

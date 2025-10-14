@@ -4101,7 +4101,7 @@
       haveVideoInput: true
       haveAudioOutput: true
       voice: Puck
-      audioThreshold: 0.100000
+      audioThreshold: 0.050000
       silenceTimeout: !<float> 2.000000
   ScriptTypes:
     "":
