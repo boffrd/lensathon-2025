@@ -45,14 +45,17 @@ export class MonumentDataHandler extends BaseScriptComponent {
   private internetModule: InternetModule = require('LensStudio:InternetModule');
   private remoteMediaModule: RemoteMediaModule = require('LensStudio:RemoteMediaModule');
   private storageApiUrl: string = "";
+  private imageAnimationDuration: number = 0.5; // Duration in seconds for scale animation
+  private imageScaleInProgress: boolean = false;
 
   onAwake() {
     print("[MonumentDataHandler] 🚀 Script awakened - starting initialization");
     
-    // Hide image by default
+    // Hide image by default (scale to zero)
     if (this.monumentImageDisplay) {
-      this.monumentImageDisplay.enabled = false;
-      this.log("🖼️ Monument image display disabled by default");
+      const transform = this.monumentImageDisplay.getSceneObject().getTransform();
+      transform.setLocalScale(new vec3(0, 0, 0));
+      this.log("🖼️ Monument image display hidden by default (scaled to 0)");
     }
     
     this.createEvent("OnStartEvent").bind(() => {
@@ -86,8 +89,8 @@ export class MonumentDataHandler extends BaseScriptComponent {
       // Listen for AI state changes to hide image when user speaks
       this.geminiAssistant.stateChangeEvent.add((data) => {
         if (data.state === "listening" && this.monumentImageDisplay) {
-          this.monumentImageDisplay.enabled = false;
-          this.log("🔇 User speaking - hiding monument image");
+          this.scaleImageOut();
+          this.log("🔇 User speaking - scaling out monument image");
         }
       });
       
@@ -471,14 +474,14 @@ export class MonumentDataHandler extends BaseScriptComponent {
           (texture: Texture) => {
             // Apply texture to image display
             this.monumentImageDisplay.mainPass.baseTex = texture;
-            // Enable the image display
-            this.monumentImageDisplay.enabled = true;
-            this.log("✅ Monument image loaded and displayed");
+            // Scale in the image display with animation
+            this.scaleImageIn();
+            this.log("✅ Monument image loaded and scaling in");
             resolve();
           },
           (error: string) => {
             // Hide image on error
-            this.monumentImageDisplay.enabled = false;
+            this.scaleImageOut();
             this.log(`❌ Error loading monument image: ${error}`);
             reject(error);
           }
@@ -488,6 +491,84 @@ export class MonumentDataHandler extends BaseScriptComponent {
         reject(error);
       }
     });
+  }
+
+  /**
+   * Smoothly scale the image in with cubic easing
+   */
+  private scaleImageIn(): void {
+    if (!this.monumentImageDisplay || this.imageScaleInProgress) {
+      return;
+    }
+
+    this.imageScaleInProgress = true;
+    const transform = this.monumentImageDisplay.getSceneObject().getTransform();
+    const startScale = transform.getLocalScale();
+    const targetScale = new vec3(32, 32, 32);
+    const startTime = getTime();
+
+    const animateScale = () => {
+      const elapsed = getTime() - startTime;
+      const progress = Math.min(elapsed / this.imageAnimationDuration, 1.0);
+      
+      // Cubic ease out: t * t * t
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+      
+      const currentScale = vec3.lerp(startScale, targetScale, easedProgress);
+      transform.setLocalScale(currentScale);
+
+      if (progress < 1.0) {
+        // Continue animation
+        const delayedEvent = this.createEvent("DelayedCallbackEvent");
+        delayedEvent.bind(() => {
+          animateScale();
+        });
+        delayedEvent.reset(0.016); // ~60fps
+      } else {
+        this.imageScaleInProgress = false;
+      }
+    };
+
+    animateScale();
+  }
+
+  /**
+   * Smoothly scale the image out with cubic easing
+   */
+  private scaleImageOut(): void {
+    if (!this.monumentImageDisplay || this.imageScaleInProgress) {
+      return;
+    }
+
+    this.imageScaleInProgress = true;
+    const transform = this.monumentImageDisplay.getSceneObject().getTransform();
+    const startScale = transform.getLocalScale();
+    const targetScale = new vec3(0, 0, 0);
+    const startTime = getTime();
+
+    const animateScale = () => {
+      const elapsed = getTime() - startTime;
+      const progress = Math.min(elapsed / this.imageAnimationDuration, 1.0);
+      
+      // Cubic ease in: t * t * t
+      const easedProgress = progress * progress * progress;
+      
+      const currentScale = vec3.lerp(startScale, targetScale, easedProgress);
+      transform.setLocalScale(currentScale);
+
+      if (progress < 1.0) {
+        // Continue animation
+        const delayedEvent = this.createEvent("DelayedCallbackEvent");
+        delayedEvent.bind(() => {
+          animateScale();
+        });
+        delayedEvent.reset(0.016); // ~60fps
+      } else {
+        this.imageScaleInProgress = false;
+      }
+    };
+
+    animateScale();
   }
 
   /**
