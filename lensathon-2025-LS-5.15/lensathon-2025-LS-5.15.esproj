@@ -15,7 +15,7 @@ metaInfo:
     []
   lensName: Lensathon 2025
   lensDescriptors:
-    []
+    - EXPERIMENTAL_API
   lensApplicability:
     - Front
     - Back
