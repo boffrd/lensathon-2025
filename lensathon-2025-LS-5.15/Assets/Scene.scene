@@ -6,11 +6,8 @@
     - !<own> 5aa0f98b-e799-448c-a2dc-cae5d04fa2a4
     - !<own> 817d42af-833b-4a9e-aca6-84fe36f922c4
     - !<own> c6767c41-a40e-4b0e-8f4d-912e2f732284
-    - !<own> 2e66e360-32c9-4968-8272-b8666c12398c
-    - !<own> 2efa8f9f-45be-442c-984a-fe75cb03c773
-    - !<own> 4187bcaa-046a-43fb-b283-07c270f36dab
-    - !<own> c6ed5f31-f774-4df2-b703-653a5a5a187f
     - !<own> a0732ca3-1bd4-4d5e-b506-91206710c302
+    - !<own> 3075ea54-a9a9-4900-af69-fa299138464a
     - !<own> 15aa9eef-0ff3-4378-a54b-8071acced9a0
   layers: !<Layers/267ee9a7-aff2-4f9d-9a49-f71214747d03>
     userLayers:
@@ -275,21 +272,6 @@
     []
   Components:
     - !<own> 9d8bc7a3-b2e3-48cd-afb9-6b478e3608bc
-- !<SceneObject/0be7df10-2e11-4845-b415-96df4145cc57>
-  PrefabRemaps:
-    []
-  Name: Orb Shader Effect
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.050000, y: 1.050000, z: 1.050000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    - !<own> 3dbf5b88-b10b-47b3-b8c3-dc03e8a61f99
 - !<SceneObject/0f704a07-d079-4984-9aaf-bf4a989b3490>
   PrefabRemaps:
     []
@@ -465,6 +447,27 @@
       persistentPinchedState: false
       defaultIcon: !<reference.Texture> 497a8f3a-2206-44d7-91d6-275b84c21c0e
       onIcon: !<reference.Texture> 497a8f3a-2206-44d7-91d6-275b84c21c0e
+  ScriptTypes:
+    "":
+      {}
+- !<ScriptComponent/1873cea1-c64e-4c89-91a1-03c96711c6ab>
+  PrefabRemaps:
+    []
+  Name: MonumentDataHandler
+  Enabled: true
+  ScriptAsset: !<reference> 81784489-ac4d-48c6-b54b-3fbf62d73adf
+  ScriptInputsDefault:
+    tableName: true
+    debugMode: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      snapCloudRequirements: !<MappingBased.AssignableType> f34b2ca9-bb3e-4714-ac7f-815de53c88ba
+      geminiAssistant: !<MappingBased.AssignableType_1> ecaa9078-d340-402f-be53-18ab9bff560f
+      tableName: test_agent_info
+      debugMode: true
+      printDbInfoOnStart: true
   ScriptTypes:
     "":
       {}
@@ -761,36 +764,6 @@
   BlendNormals: false
   BlendShapes:
     {}
-- !<SceneObject/2e66e360-32c9-4968-8272-b8666c12398c>
-  PrefabRemaps:
-    []
-  Name: Example1-SupabaseConnector
-  Enabled: false
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: -51.073563, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    - !<own> 648eb64c-d740-496d-a71a-436eb1730ae7
-- !<SceneObject/2efa8f9f-45be-442c-984a-fe75cb03c773>
-  PrefabRemaps:
-    []
-  Name: Example2-RealtimeCursor
-  Enabled: false
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    - !<own> 870091c8-bb67-486f-8528-27f564b29366
 - !<SceneObject/2fa6895d-6663-4624-9e74-6b038b982135>
   PrefabRemaps:
     []
@@ -821,6 +794,21 @@
     - !<own> 2bea4673-7f91-4fc5-beb1-e82a05150ca9
   Components:
     []
+- !<SceneObject/3075ea54-a9a9-4900-af69-fa299138464a>
+  PrefabRemaps:
+    []
+  Name: MonumentDataHandler
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 1873cea1-c64e-4c89-91a1-03c96711c6ab
 - !<SceneObject/307b5f4c-6ae2-430c-a6ca-979a01c6b029>
   PrefabRemaps:
     []
@@ -1130,26 +1118,6 @@
     - !<own> 4a8fba8e-5e79-4c17-9b90-eecc02c7b7dc
   Components:
     []
-- !<RenderMeshVisual/3dbf5b88-b10b-47b3-b8c3-dc03e8a61f99>
-  PrefabRemaps:
-    []
-  Name: Render Mesh Visual
-  Enabled: true
-  RenderOrder: 0
-  StretchMode: Stretch
-  VerticalAlignment: Center
-  HorizontalAlignment: Center
-  MeshShadowMode: None
-  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
-  ShadowDensity: 1.000000
-  Materials:
-    - !<reference> 03433ed6-475f-4447-91da-171c8c810181
-  Mesh: !<reference> 30236ec2-a183-4ab8-b7cb-eb5aca3101e1
-  Skin: !<reference> 00000000-0000-0000-0000-000000000000
-  BlendShapesEnabled: true
-  BlendNormals: false
-  BlendShapes:
-    {}
 - !<ScriptComponent/3e245a32-c411-4ee4-b8c8-e9ec2ecd1a86>
   PrefabRemaps:
     []
@@ -1428,54 +1396,6 @@
     []
   Components:
     - !<own> c0551dd3-83f6-4a7a-a7fa-f6c22fceaa98
-- !<SceneObject/4187bcaa-046a-43fb-b283-07c270f36dab>
-  PrefabRemaps:
-    []
-  Name: Example3-LoadAsset
-  Enabled: false
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    - !<own> 42b3beec-a99b-465f-a181-f1a6843fca9a
-- !<ScriptComponent/42b3beec-a99b-465f-a181-f1a6843fca9a>
-  PrefabRemaps:
-    []
-  Name: StorageLoader
-  Enabled: true
-  ScriptAsset: !<reference> eab8fea5-0838-465b-9770-6283bc313ebf
-  ScriptInputsDefault:
-    enableProgressLogs: true
-    enableDebugLogs: true
-    modelDistance: true
-  ScriptTypesDefault:
-    {}
-  ScriptInputs:
-    "":
-      snapCloudRequirements: !<MappingBased.AssignableType> f34b2ca9-bb3e-4714-ac7f-815de53c88ba
-      storageBucket: specs-bucket
-      modelFileName: models/rabbit.glb
-      imageFileName: images/spectacles.jpg
-      audioFileName: audio/chill.mp3
-      cameraObject: !<reference.SceneObject> 00000000-0000-0065-0000-000000000064
-      modelParent: !<reference.SceneObject> f4b718d1-d1cc-47ab-9c6a-cfcbdcf5e4b3
-      imageDisplay: !<reference.Image> 4f0918a0-47ee-4f22-8ff5-e7444593f7c6
-      audioPlayer: !<reference.SceneObject> a463e437-cf84-4cc1-a070-53e7a0ea3dbf
-      defaultMaterial: !<reference.Material> 718ca534-08fc-4f72-9029-cd70e3980118
-      loadButton: !<MappingBased.AssignableType_1> a5e108d6-f452-4f87-a9b1-5802196f4bc3
-      enableProgressLogs: true
-      enableDebugLogs: true
-      modelDistance: !<float> 100.000000
-      modelScale: 0.100000
-      statusText: !<reference.Text> 8d686cac-3e9e-493d-a387-4d12062c08f7
-  ScriptTypes:
-    "":
-      {}
 - !<SceneObject/433e171a-f40d-43f9-9b3b-14cad9905b8e>
   PrefabRemaps:
     []
@@ -2069,9 +1989,9 @@
     {}
   ScriptInputs:
     "":
-      lerpIntensity: 0.150000
-      distanceToUser: !<float> 56.000000
-      positionOffset: !<Vec3> {x: 0.000000, y: -8.000000, z: -220.000000}
+      lerpIntensity: 0.300000
+      distanceToUser: !<float> 41.000000
+      positionOffset: !<Vec3> {x: 0.000000, y: -8.000000, z: -100.000000}
       returnToViewSpeed: 0.200000
       geminiAssistant: !<reference.ScriptComponent> ecaa9078-d340-402f-be53-18ab9bff560f
       audioReactiveMultiplier: !<float> 2.000000
@@ -2425,24 +2345,6 @@
       _axisBufferDegrees: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
       _axisEasing: !<Vec3> {x: 1.000000, y: 1.000000, z: 1.000000}
       duration: 0.033000
-  ScriptTypes:
-    "":
-      {}
-- !<ScriptComponent/648eb64c-d740-496d-a71a-436eb1730ae7>
-  PrefabRemaps:
-    []
-  Name: TableConnector
-  Enabled: true
-  ScriptAsset: !<reference> 4a1d4415-50fb-4cdf-b942-3f16c9828884
-  ScriptInputsDefault:
-    {}
-  ScriptTypesDefault:
-    {}
-  ScriptInputs:
-    "":
-      snapCloudRequirements: !<MappingBased.AssignableType> f34b2ca9-bb3e-4714-ac7f-815de53c88ba
-      dataRetrievalButton: !<MappingBased.AssignableType_1> 6ee5906a-c3c1-431b-aff5-03d881491f47
-      logText: !<reference.Text> de5d58f5-adcc-4384-8c47-239a34ce0b88
   ScriptTypes:
     "":
       {}
@@ -3150,52 +3052,6 @@
     - !<own> 417ac83f-7e15-471e-a158-a5363903f447
   Components:
     []
-- !<ScriptComponent/870091c8-bb67-486f-8528-27f564b29366>
-  PrefabRemaps:
-    []
-  Name: RealtimeCursor
-  Enabled: true
-  ScriptAsset: !<reference> 1b6667ad-2c5a-44cb-8c85-b85f87f8670a
-  ScriptInputsDefault:
-    movementSpeed: true
-    movementScale: true
-    heightOffset: true
-    lsXRange: true
-    lsYRange: true
-    coordinateScale: true
-    perspectiveScale: true
-    invertX: true
-    invertY: true
-    enableDebugLogs: true
-    verboseLogging: true
-    logFrequency: true
-  ScriptTypesDefault:
-    {}
-  ScriptInputs:
-    "":
-      snapCloudRequirements: !<MappingBased.AssignableType> f34b2ca9-bb3e-4714-ac7f-815de53c88ba
-      channelName: spectacles-demo-channel
-      toggleModeButton: !<MappingBased.AssignableType_1> 704f8a3b-ed7c-4e7e-8013-0d8eb62ff8b8
-      cursorObject: !<reference.SceneObject> a0732ca3-1bd4-4d5e-b506-91206710c302
-      modeText: !<reference.Text> 4dca2c72-5e22-47f7-8a45-d82f6586a2f6
-      statusText: !<reference.SceneObject> 5d1e53da-7b77-4cc3-be37-4b175c1672aa
-      broadcastInterval: 0.200000
-      movementSpeed: 0.150000
-      movementScale: 1.500000
-      cursorZPosition: !<float> -50.000000
-      heightOffset: !<float> 0.000000
-      lsXRange: !<float> 50.000000
-      lsYRange: !<float> 30.000000
-      coordinateScale: !<float> 10.000000
-      perspectiveScale: !<float> 10.000000
-      invertX: false
-      invertY: false
-      enableDebugLogs: true
-      verboseLogging: false
-      logFrequency: !<float> 10.000000
-  ScriptTypes:
-    "":
-      {}
 - !<SceneObject/876856b0-0b08-4488-9e57-976a4ddd348f>
   PrefabRemaps:
     []
@@ -3510,7 +3366,6 @@
   Children:
     - !<own> cc390943-991c-47cc-92ea-65113d0b701d
     - !<own> a5e50cdc-be4d-4e99-8855-9ec1c39d9e37
-    - !<own> 0be7df10-2e11-4845-b415-96df4145cc57
   Components:
     []
 - !<SceneObject/9b8da751-599e-41c3-bebf-7b11dadee25a>
@@ -3657,27 +3512,6 @@
     []
   Components:
     - !<own> d42dffa3-7a79-490c-96e3-7b680952b8fb
-- !<ScriptComponent/9e2de5d1-c210-4ef5-9dd8-0931d1012189>
-  PrefabRemaps:
-    []
-  Name: EdgeFunctionImgProcessing
-  Enabled: true
-  ScriptAsset: !<reference> 1464f24d-8987-4b55-aba8-c1e0d541f73a
-  ScriptInputsDefault:
-    enableDebugLogs: true
-  ScriptTypesDefault:
-    {}
-  ScriptInputs:
-    "":
-      snapCloudRequirements: !<MappingBased.AssignableType> f34b2ca9-bb3e-4714-ac7f-815de53c88ba
-      functionName: specs-function
-      imageUrl: "[FUNCTION ENDPOINT HERE]"
-      outputImage: !<reference.Image> 4f0918a0-47ee-4f22-8ff5-e7444593f7c6
-      processButton: !<MappingBased.AssignableType_1> 57f91221-0e62-4deb-8a94-a9b75d57f9cd
-      enableDebugLogs: true
-  ScriptTypes:
-    "":
-      {}
 - !<RenderMeshVisual/9f3cd5c5-dce4-4af6-b918-94c05c6befc6>
   PrefabRemaps:
     []
@@ -4424,7 +4258,7 @@
   TouchHandler: !<reference> 00000000-0000-0000-0000-000000000000
   SizeToFit: false
   FontSize: 40
-  Font: !<reference> e9e1a5dc-8ac6-4846-836d-7a8ccd08672f
+  Font: !<reference> 00000000-0000-0000-0000-000000000000
   LayoutRect:
     left: 0.000000
     bottom: -2.250000
@@ -4910,21 +4744,6 @@
   BlendNormals: false
   BlendShapes:
     {}
-- !<SceneObject/c6ed5f31-f774-4df2-b703-653a5a5a187f>
-  PrefabRemaps:
-    []
-  Name: Example4-EdgeFunctions
-  Enabled: false
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    - !<own> 9e2de5d1-c210-4ef5-9dd8-0931d1012189
 - !<RenderMeshVisual/c7b98ccf-629e-4278-be3c-e8861b8b8706>
   PrefabRemaps:
     []
@@ -5148,7 +4967,7 @@
   TouchHandler: !<reference> 00000000-0000-0000-0000-000000000000
   SizeToFit: false
   FontSize: 35
-  Font: !<reference> e9e1a5dc-8ac6-4846-836d-7a8ccd08672f
+  Font: !<reference> 00000000-0000-0000-0000-000000000000
   LayoutRect:
     left: -7.000000
     bottom: -10.000000
@@ -5851,7 +5670,6 @@
   Enabled: true
   ScriptAsset: !<reference> cb0c0223-7f9d-4ecf-917f-9060a96703f2
   ScriptInputsDefault:
-    instructions: true
     voice: true
   ScriptTypesDefault:
     {}
@@ -5860,7 +5678,7 @@
       websocketRequirementsObj: !<reference.SceneObject> 6d6a2b2d-ecc1-4fc6-9fc0-6c0a86398b35
       dynamicAudioOutput: !<MappingBased.AssignableType> 976b1c1c-dc03-475e-8e3f-4ac9d17157cc
       microphoneRecorder: !<MappingBased.AssignableType_1> 9d8bc7a3-b2e3-48cd-afb9-6b478e3608bc
-      instructions: You are a helpful assistant that loves to make puns
+      instructions: ""
       haveVideoInput: true
       haveAudioOutput: true
       voice: Puck
@@ -6378,7 +6196,7 @@
   PrefabRemaps:
     []
   Name: OrbMesh
-  Enabled: false
+  Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
     Position: {x: 0.000000, y: 0.000000, z: 0.000000}

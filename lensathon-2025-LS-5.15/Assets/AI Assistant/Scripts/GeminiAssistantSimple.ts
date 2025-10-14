@@ -30,8 +30,24 @@ export class GeminiAssistant extends BaseScriptComponent {
   @input
   @widget(new TextAreaWidget())
   private instructions: string =
-    "You are a helpful assistant that loves to make puns";
-  @input private haveVideoInput: boolean = false;
+    `You are Freddy, a friendly and knowledgeable travel guide assistant. Your purpose is to help users learn about monuments and landmarks they encounter.
+
+IMPORTANT RULES:
+1. Always be polite, respectful, and enthusiastic
+2. Keep responses concise but informative (2-3 sentences unless asked for more detail)
+3. When you recognize a monument or landmark from the camera, immediately call the identify_monument function with the monument name
+4. After identifying a monument, wait for the database information to be provided, then share it conversationally
+5. If you're not sure about a monument, politely say you're not certain and ask for clarification
+6. CRITICAL: You MUST ONLY use information from the database that is provided to you. Never make up facts or use information not in the database.
+7. When users ask questions about monuments (history, facts, visiting tips, etc.), ONLY answer based on the database information you received
+8. If a user asks about something not covered in the database information, politely say "I don't have that specific information in my database, but I can tell you what I do know" and share what IS in the database
+9. The database will provide you with a list of monuments at startup - these are the ONLY monuments you should identify
+10. When database information is sent to you (marked with "DATABASE INFO"), memorize it and use ONLY that information to answer user questions
+11. Encourage users to ask follow-up questions about history, architecture, or visiting tips, but answer ONLY from database information
+12. Be patient and friendly even if users ask the same question multiple times
+
+When analyzing the camera feed, look for distinctive architectural features, sculptures, buildings, or landmarks that match the visual descriptions from the monument database provided to you.`;
+  @input private haveVideoInput: boolean = true;
   @ui.group_end
   @ui.separator
   @ui.group_start("Outputs")
@@ -39,7 +55,7 @@ export class GeminiAssistant extends BaseScriptComponent {
     '<span style="color: yellow;">⚠️ To prevent audio feedback loop in Lens Studio Editor, use headphones or manage your microphone input.</span>'
   )
   @input
-  private haveAudioOutput: boolean = false;
+  private haveAudioOutput: boolean = true;
   @input
   @showIf("haveAudioOutput", true)
   @widget(
@@ -107,12 +123,22 @@ export class GeminiAssistant extends BaseScriptComponent {
     let completedTextDisplay = true;
 
     this.GeminiLive.onMessage.add((message) => {
-      print("Received message: " + JSON.stringify(message));
+      // Only log important messages (not audio data)
+      if (message.setupComplete || message.toolCall) {
+        print("Received message: " + JSON.stringify(message));
+      }
       // Setup complete, begin sending data
       if (message.setupComplete) {
         message = message as GeminiTypes.Live.SetupCompleteEvent;
         print("Setup complete");
         this.setupInputs();
+        // Auto-start streaming for travel assistant
+        print("Auto-starting audio/video streaming for travel assistant");
+        this.streamData(true);
+        // Send initial greeting after a short delay
+        setTimeout(() => {
+          this.sendInitialGreeting();
+        }, 1500);
       }
 
       if (message?.serverContent) {
@@ -193,12 +219,16 @@ export class GeminiAssistant extends BaseScriptComponent {
 
   public streamData(stream: boolean) {
     if (stream) {
+      print("🎤 Starting audio/video streaming...");
       if (this.haveVideoInput) {
         this.videoController.startRecording();
+        print("📹 Video input enabled");
       }
 
       this.microphoneRecorder.startRecording();
+      print("🎤 Microphone recording started - speak to the assistant!");
     } else {
+      print("⏹️ Stopping audio/video streaming...");
       if (this.haveVideoInput) {
         this.videoController.stopRecording();
       }
@@ -279,23 +309,33 @@ export class GeminiAssistant extends BaseScriptComponent {
       };
     }
 
-    // Define the Snap3D tool
+    // Define the monument identification tool
     const tools = [
       {
         function_declarations: [
           {
-            name: "Snap3D",
-            description: "Generates a 3D model based on a text prompt",
+            name: "identify_monument",
+            description: "Call this function when you recognize a monument or landmark in the camera feed that matches visual descriptions from the database. This will fetch detailed information about the monument.",
             parameters: {
               type: "object",
               properties: {
-                prompt: {
+                monument_name: {
                   type: "string",
                   description:
-                    "The text prompt to generate a 3D model from. Cartoonish styles work best. Use 'full body' when generating characters.",
+                    "The exact name of the monument or landmark you identified (e.g., 'Eiffel Tower', 'Statue of Liberty', 'Colosseum')",
+                },
+                confidence: {
+                  type: "number",
+                  description: "Your confidence level in this identification (0.0 to 1.0)",
+                  minimum: 0,
+                  maximum: 1,
+                },
+                visual_match_reason: {
+                  type: "string",
+                  description: "Brief explanation of what visual features you matched (e.g., 'iron lattice tower structure', 'green copper statue holding torch')",
                 },
               },
-              required: ["prompt"],
+              required: ["monument_name", "confidence", "visual_match_reason"],
             },
           },
         ],
@@ -303,7 +343,7 @@ export class GeminiAssistant extends BaseScriptComponent {
     ];
 
     // Send the session setup message
-    let modelUri = `models/gemini-2.0-flash-live-preview-04-09`;
+    let modelUri =  `models/gemini-live-2.5-flash-preview-native-audio`;
     const sessionSetupMessage = {
       setup: {
         model: modelUri,
@@ -332,5 +372,114 @@ export class GeminiAssistant extends BaseScriptComponent {
     } else {
       print("DynamicAudioOutput is not initialized.");
     }
+  }
+
+  /**
+   * Send initial greeting to user
+   * Called after session setup is complete
+   */
+  private sendInitialGreeting(): void {
+    print("📢 Sending initial greeting to AI...");
+    
+    if (!this.GeminiLive) {
+      print("❌ Cannot send greeting - GeminiLive not initialized");
+      return;
+    }
+
+    const greetingMessage = {
+      client_content: {
+        turns: [
+          {
+            role: "user",
+            parts: [
+              {
+                text: "Introduce yourself by saying: 'Hey I'm Freddy, your personal travel agent. Ask me anything!'"
+              }
+            ]
+          }
+        ],
+        turn_complete: true
+      }
+    } as GeminiTypes.Live.ClientContent;
+    
+    this.GeminiLive.send(greetingMessage);
+    print("✅ Greeting message sent to AI");
+  }
+
+  /**
+   * Send the list of all monuments as initial context to the AI
+   * This helps the AI know what monuments to look for in the camera feed
+   */
+  public sendMonumentContext(contextText: string): void {
+    if (!this.GeminiLive) {
+      print("❌ Cannot send monument context - GeminiLive not initialized");
+      return;
+    }
+
+    print("🗺️ Sending monument database context to AI...");
+    
+    const contextMessage = {
+      client_content: {
+        turns: [
+          {
+            role: "user",
+            parts: [
+              {
+                text: contextText
+              }
+            ]
+          }
+        ],
+        turn_complete: true
+      }
+    } as GeminiTypes.Live.ClientContent;
+    
+    this.GeminiLive.send(contextMessage);
+    print("✅ Monument context sent to AI");
+  }
+
+  /**
+   * Send monument information to the AI after fetching from database
+   * This should be called by the StateManager/handler after Supabase query
+   */
+  public sendMonumentInfo(monumentData: {
+    name: string;
+    visual: string;
+    description: string;
+    history: string;
+  }): void {
+    if (!this.GeminiLive) {
+      print("❌ Cannot send monument info - GeminiLive not initialized");
+      return;
+    }
+
+    print(`📚 Sending monument info to AI: ${monumentData.name}`);
+    
+    const infoMessage = {
+      client_content: {
+        turns: [
+          {
+            role: "user",
+            parts: [
+              {
+                text: `DATABASE INFO for ${monumentData.name}:
+                
+Visual Description: ${monumentData.visual}
+Description: ${monumentData.description}
+History: ${monumentData.history}
+
+INSTRUCTIONS: This is the ONLY information you have about ${monumentData.name}. You MUST use ONLY this information when answering any questions about this monument. 
+
+Now share this information with the user in a friendly, conversational way. Focus on the most interesting facts from the description and history. If the user asks questions later, answer ONLY using the information above - do not make up or infer additional facts.`
+              }
+            ]
+          }
+        ],
+        turn_complete: true
+      }
+    } as GeminiTypes.Live.ClientContent;
+    
+    this.GeminiLive.send(infoMessage);
+    print("✅ Monument information sent to AI");
   }
 }

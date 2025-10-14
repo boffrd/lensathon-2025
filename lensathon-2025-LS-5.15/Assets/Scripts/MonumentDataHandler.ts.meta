@@ -1,0 +1,61 @@
+- !<AssetImportMetadata/f6c33472-36c1-4be0-81ac-b1dfcfff289e>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 81784489-ac4d-48c6-b54b-3fbf62d73adf
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 81784489-ac4d-48c6-b54b-3fbf62d73adf
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 520ec6bb-04bd-47b8-8e9f-2411f55fb893
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/520ec6bb-04bd-47b8-8e9f-2411f55fb893>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 40eb7014-6e4a-47f6-bcc1-c04e6fc4fb3b
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    debugMode: false
+    geminiAssistant: false
+    printDbInfoOnStart: false
+    snapCloudRequirements: false
+    tableName: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - snapCloudRequirements: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      geminiAssistant: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
+      tableName: test_agent_info
+      debugMode: true
+      printDbInfoOnStart: false
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @input AssignableType snapCloudRequirements {"hint":"Reference to SnapCloudRequirements for Supabase configuration"}'
+    - '// @input AssignableType_1 geminiAssistant {"hint":"Reference to the GeminiAssistant component"}'
+    - '// @input string tableName = "test_agent_info" {"hint":"Name of the table containing monument information"}'
+    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"group_start", "label":"Debug Settings"}'
+    - // @input bool debugMode = true
+    - '// @ui {"widget":"label", "label":"Enable detailed debug logging for database operations"}'
+    - // @input bool printDbInfoOnStart
+    - '// @ui {"widget":"label", "label":"Print all monument data from database on start"}'
+    - '// @ui {"widget":"group_end"}'

@@ -604,9 +604,13 @@ export class SphereController extends BaseScriptComponent {
   }
 
   public setText(data: { text: string; completed: boolean }) {
+    // Always ensure world space text is enabled and visible
+    this.worldSpaceText.enabled = true;
+    
     if (data.completed) {
       this.worldSpaceText.text = data.text;
       this.screenSpaceText.text = data.text;
+      print(`💬 Text displayed: ${data.text.substring(0, 50)}...`);
     } else {
       this.worldSpaceText.text += data.text;
       this.screenSpaceText.text += data.text;
