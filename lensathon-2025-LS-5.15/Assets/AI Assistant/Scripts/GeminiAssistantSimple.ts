@@ -81,6 +81,22 @@ When analyzing the camera feed, look for distinctive architectural features, scu
   );
   private GeminiLive: GeminiLiveWebsocket;
 
+  // Audio intensity tracking for idle vs listening detection
+  @ui.separator
+  @ui.group_start("Audio Detection")
+  @input
+  @ui.label("Minimum audio intensity to consider as 'listening' (0.0 - 1.0)")
+  private audioThreshold: number = 0.02;
+  
+  @input
+  @ui.label("Time in seconds of silence before going idle")
+  private silenceTimeout: number = 2.0;
+  @ui.group_end
+
+  private lastAudioIntensity: number = 0;
+  private lastAudioTime: number = 0;
+  private silenceCheckEvent: SceneEvent | null = null;
+
   public updateTextEvent: Event<{ text: string; completed: boolean }> =
     new Event<{ text: string; completed: boolean }>();
 
@@ -92,6 +108,25 @@ When analyzing the camera feed, look for distinctive architectural features, scu
     name: string;
     args: any;
   }>();
+
+  public stateChangeEvent: Event<{
+    state: "idle" | "listening" | "talking";
+  }> = new Event<{
+    state: "idle" | "listening" | "talking";
+  }>();
+
+  private currentState: "idle" | "listening" | "talking" = "idle";
+
+  /**
+   * Update the AI assistant state and notify listeners
+   */
+  private setState(newState: "idle" | "listening" | "talking"): void {
+    if (this.currentState !== newState) {
+      this.currentState = newState;
+      print(`🤖 [AI State] Changed to: ${newState.toUpperCase()}`);
+      this.stateChangeEvent.invoke({ state: newState });
+    }
+  }
 
   createGeminiLiveSession() {
     this.websocketRequirementsObj.enabled = true;
@@ -118,6 +153,7 @@ When analyzing the camera feed, look for distinctive architectural features, scu
     this.GeminiLive.onOpen.add((event) => {
       print("Connection opened");
       this.sessionSetup();
+      this.setState("idle");
     });
 
     let completedTextDisplay = true;
@@ -153,9 +189,13 @@ When analyzing the camera feed, look for distinctive architectural features, scu
             message.serverContent.modelTurn.parts[0].inlineData.data;
           let audio = Base64.decode(b64Audio);
           this.dynamicAudioOutput.addAudioFrame(audio);
+          // AI is talking when sending audio
+          this.setState("talking");
         }
         if (message.serverContent.interrupted) {
           this.dynamicAudioOutput.interruptAudioOutput();
+          // When interrupted, go back to idle (will detect listening if user is speaking)
+          this.setState("idle");
         }
         // Show output transcription
         else if (message?.serverContent?.outputTranscription?.text) {
@@ -192,6 +232,8 @@ When analyzing the camera feed, look for distinctive architectural features, scu
         // Determine if the response is complete
         else if (message?.serverContent?.turnComplete) {
           completedTextDisplay = true;
+          // When turn is complete, go back to idle (will switch to listening when user speaks)
+          this.setState("idle");
         }
       }
 
@@ -227,6 +269,9 @@ When analyzing the camera feed, look for distinctive architectural features, scu
 
       this.microphoneRecorder.startRecording();
       print("🎤 Microphone recording started - speak to the assistant!");
+      // Start with idle state, will switch to listening when audio detected
+      this.setState("idle");
+      this.startSilenceMonitoring();
     } else {
       print("⏹️ Stopping audio/video streaming...");
       if (this.haveVideoInput) {
@@ -234,6 +279,65 @@ When analyzing the camera feed, look for distinctive architectural features, scu
       }
 
       this.microphoneRecorder.stopRecording();
+      this.stopSilenceMonitoring();
+      // When streaming stops, AI goes idle
+      this.setState("idle");
+    }
+  }
+
+  /**
+   * Calculate audio intensity from audio frame to detect speech
+   */
+  private calculateAudioIntensity(audioFrame: Float32Array): void {
+    // Calculate RMS (Root Mean Square) of audio samples
+    let sum = 0;
+    for (let i = 0; i < audioFrame.length; i++) {
+      sum += audioFrame[i] * audioFrame[i];
+    }
+    const rms = Math.sqrt(sum / audioFrame.length);
+    this.lastAudioIntensity = rms;
+    
+    // If audio is above threshold and not currently talking, switch to listening
+    if (rms > this.audioThreshold && this.currentState !== "talking") {
+      this.lastAudioTime = getTime();
+      if (this.currentState === "idle") {
+        this.setState("listening");
+      }
+    }
+  }
+
+  /**
+   * Start monitoring for silence to return to idle state
+   */
+  private startSilenceMonitoring(): void {
+    this.lastAudioTime = getTime();
+    
+    // Stop existing monitoring if any
+    this.stopSilenceMonitoring();
+    
+    // Check every frame if we should go back to idle
+    this.silenceCheckEvent = this.createEvent("UpdateEvent");
+    this.silenceCheckEvent.bind(() => {
+      const currentTime = getTime();
+      const silenceDuration = currentTime - this.lastAudioTime;
+      
+      // If not talking and been silent for longer than threshold, go idle
+      if (
+        this.currentState === "listening" && 
+        silenceDuration > this.silenceTimeout
+      ) {
+        this.setState("idle");
+      }
+    });
+  }
+
+  /**
+   * Stop monitoring for silence
+   */
+  private stopSilenceMonitoring(): void {
+    if (this.silenceCheckEvent) {
+      this.silenceCheckEvent.enabled = false;
+      this.silenceCheckEvent = null;
     }
   }
 
@@ -255,6 +359,9 @@ When analyzing the camera feed, look for distinctive architectural features, scu
     // Configure the microphone
     this.microphoneRecorder.onAudioFrame.add((audioFrame) => {
       this.audioProcessor.processFrame(audioFrame);
+      
+      // Calculate audio intensity for idle/listening detection
+      this.calculateAudioIntensity(audioFrame);
     });
 
     if (this.haveVideoInput) {

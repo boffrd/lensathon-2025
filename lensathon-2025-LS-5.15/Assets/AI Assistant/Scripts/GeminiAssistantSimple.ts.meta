@@ -26,11 +26,13 @@
   ExportUid: 00000000-0000-0000-0000-000000000000
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
+    audioThreshold: false
     dynamicAudioOutput: false
     haveAudioOutput: false
     haveVideoInput: false
     instructions: false
     microphoneRecorder: false
+    silenceTimeout: false
     voice: false
     websocketRequirementsObj: false
   ScriptTypesHidden:
@@ -49,6 +51,8 @@
       haveVideoInput: false
       haveAudioOutput: false
       voice: Puck
+      audioThreshold: 0.020000
+      silenceTimeout: !<float> 2.000000
   ScriptTypes:
     -
       {}
@@ -74,3 +78,10 @@
     - '// @input string voice = "Puck" {"widget":"combobox", "values":[{"label":"Puck", "value":"Puck"}, {"label":"Charon", "value":"Charon"}, {"label":"Kore", "value":"Kore"}, {"label":"Fenrir", "value":"Fenrir"}, {"label":"Aoede", "value":"Aoede"}, {"label":"Leda", "value":"Leda"}, {"label":"Orus", "value":"Orus"}, {"label":"Zephyr", "value":"Zephyr"}], "showIf":"haveAudioOutput", "showIfValue":true}'
     - '// @ui {"widget":"group_end"}'
     - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"group_start", "label":"Audio Detection"}'
+    - // @input float audioThreshold = 0.02
+    - "// @ui {\"widget\":\"label\", \"label\":\"Minimum audio intensity to consider as 'listening' (0.0 - 1.0)\"}"
+    - // @input float silenceTimeout = 2
+    - '// @ui {"widget":"label", "label":"Time in seconds of silence before going idle"}'
+    - '// @ui {"widget":"group_end"}'

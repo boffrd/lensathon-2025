@@ -5671,6 +5671,7 @@
   ScriptAsset: !<reference> cb0c0223-7f9d-4ecf-917f-9060a96703f2
   ScriptInputsDefault:
     voice: true
+    silenceTimeout: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
@@ -5682,6 +5683,8 @@
       haveVideoInput: true
       haveAudioOutput: true
       voice: Puck
+      audioThreshold: 0.100000
+      silenceTimeout: !<float> 2.000000
   ScriptTypes:
     "":
       {}
