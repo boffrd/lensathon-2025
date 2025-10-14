@@ -19,6 +19,15 @@ export class MonumentDataHandler extends BaseScriptComponent {
   @hint("Name of the table containing monument information")
   private tableName: string = "test_agent_info";
 
+  @input
+  @hint("Name of the Supabase Storage bucket containing monument images")
+  private storageBucket: string = "monument-images";
+
+  @input
+  @hint("Image component to display loaded monument images")
+  @allowUndefined
+  private monumentImageDisplay: Image;
+
   @ui.separator
   @ui.group_start("Debug Settings")
   @input
@@ -33,6 +42,9 @@ export class MonumentDataHandler extends BaseScriptComponent {
   private client: any;
   private uid: string;
   private isConnected: boolean = false;
+  private internetModule: InternetModule = require('LensStudio:InternetModule');
+  private remoteMediaModule: RemoteMediaModule = require('LensStudio:RemoteMediaModule');
+  private storageApiUrl: string = "";
 
   onAwake() {
     print("[MonumentDataHandler] 🚀 Script awakened - starting initialization");
@@ -103,6 +115,10 @@ export class MonumentDataHandler extends BaseScriptComponent {
     
     print(`[MonumentDataHandler] 🔑 Project URL: ${supabaseProject.url}`);
     print(`[MonumentDataHandler] 🔑 Public Token: ${supabaseProject.publicToken ? "✓ Present" : "✗ Missing"}`);
+    
+    // Initialize storage URL for loading images
+    this.storageApiUrl = this.snapCloudRequirements.getStorageApiUrl();
+    print(`[MonumentDataHandler] 🖼️  Storage API URL: ${this.storageApiUrl}`);
     
     // Configure client options with heartbeat fix for alpha
     const options = {
@@ -256,6 +272,13 @@ export class MonumentDataHandler extends BaseScriptComponent {
       
       // Fetch monument data from Supabase
       await this.fetchMonumentData(monumentName);
+    } else if (functionName === "show_monument_image") {
+      const monumentName = args.monument_name;
+      
+      this.log(`🖼️ AI requested to show image for: ${monumentName}`);
+      
+      // Fetch and display monument image
+      await this.fetchAndDisplayMonumentImage(monumentName);
     }
   }
 
@@ -271,11 +294,11 @@ export class MonumentDataHandler extends BaseScriptComponent {
     this.log(`🔍 Fetching data for monument: ${monumentName}`);
 
     try {
-      // Query the database for the monument
+      // Query the database for the monument (including image_url)
       // Using case-insensitive search with ilike
       const { data, error } = await this.client
         .from(this.tableName)
-        .select("name, visual, description, history")
+        .select("name, visual, description, history, image_url")
         .ilike("name", `%${monumentName}%`)
         .limit(1);
 
@@ -322,6 +345,123 @@ export class MonumentDataHandler extends BaseScriptComponent {
         history: "Information not available"
       });
     }
+  }
+
+  /**
+   * Fetch monument image URL from database and display it
+   */
+  private async fetchAndDisplayMonumentImage(monumentName: string): Promise<void> {
+    if (!this.client || !this.isConnected) {
+      this.log("❌ Cannot fetch image - Supabase not connected");
+      this.sendImageFunctionResponse(monumentName, false, "Database not connected");
+      return;
+    }
+
+    this.log(`🔍 Fetching image URL for monument: ${monumentName}`);
+
+    try {
+      // Query the database for the monument's image_url
+      const { data, error } = await this.client
+        .from(this.tableName)
+        .select("name, image_url")
+        .ilike("name", `%${monumentName}%`)
+        .limit(1);
+
+      if (error) {
+        this.log(`❌ Database error fetching image: ${error.message}`);
+        this.sendImageFunctionResponse(monumentName, false, "Database error");
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        this.log(`⚠️ No monument found with name: ${monumentName}`);
+        this.sendImageFunctionResponse(monumentName, false, "Monument not found");
+        return;
+      }
+
+      const monument = data[0];
+      
+      if (!monument.image_url) {
+        this.log(`⚠️ No image URL available for monument: ${monument.name}`);
+        this.sendImageFunctionResponse(monumentName, false, "No image available");
+        return;
+      }
+
+      this.log(`✅ Found image URL: ${monument.image_url}`);
+      
+      // Load and display the image
+      await this.loadMonumentImage(monument.image_url);
+      
+      // Send success response to AI
+      this.sendImageFunctionResponse(monumentName, true, "Historic image displayed successfully");
+      
+    } catch (error) {
+      this.log(`❌ Exception fetching monument image: ${error}`);
+      this.sendImageFunctionResponse(monumentName, false, `Error: ${error}`);
+    }
+  }
+
+  /**
+   * Send function response back to AI after image operation
+   */
+  private sendImageFunctionResponse(monumentName: string, success: boolean, message: string): void {
+    if (!this.geminiAssistant) {
+      return;
+    }
+
+    const response = success 
+      ? `Successfully displayed historic image of ${monumentName}. ${message}`
+      : `Unable to display image of ${monumentName}. ${message}`;
+    
+    this.log(`📤 Sending function response to AI: ${response}`);
+    this.geminiAssistant.sendFunctionCallUpdate("show_monument_image", response);
+  }
+
+  /**
+   * Load monument image from Supabase Storage
+   */
+  private async loadMonumentImage(imageFilename: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      try {
+        if (!this.monumentImageDisplay) {
+          this.log("⚠️ No image display component configured");
+          resolve();
+          return;
+        }
+
+        // Check if imageFilename is already a full URL or just a filename
+        let imageUrl: string;
+        if (imageFilename.startsWith("http://") || imageFilename.startsWith("https://")) {
+          // Already a full URL, use it directly
+          imageUrl = imageFilename;
+        } else {
+          // Just a filename, construct full storage URL
+          imageUrl = `${this.storageApiUrl}${this.storageBucket}/${imageFilename}`;
+        }
+        this.log(`🖼️ Loading image from: ${imageUrl}`);
+
+        // Create resource from URL
+        const resource = this.internetModule.makeResourceFromUrl(imageUrl);
+
+        // Load as image texture
+        this.remoteMediaModule.loadResourceAsImageTexture(
+          resource,
+          (texture: Texture) => {
+            // Apply texture to image display
+            this.monumentImageDisplay.mainPass.baseTex = texture;
+            this.log("✅ Monument image loaded and displayed");
+            resolve();
+          },
+          (error: string) => {
+            this.log(`❌ Error loading monument image: ${error}`);
+            reject(error);
+          }
+        );
+      } catch (error) {
+        this.log(`❌ Exception loading monument image: ${error}`);
+        reject(error);
+      }
+    });
   }
 
   /**

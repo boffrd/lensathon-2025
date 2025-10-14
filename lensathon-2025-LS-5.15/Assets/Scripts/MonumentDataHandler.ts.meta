@@ -28,8 +28,10 @@
   ScriptInputsHidden:
     debugMode: false
     geminiAssistant: false
+    monumentImageDisplay: false
     printDbInfoOnStart: false
     snapCloudRequirements: false
+    storageBucket: false
     tableName: false
   ScriptTypesHidden:
     {}
@@ -43,6 +45,8 @@
     - snapCloudRequirements: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
       geminiAssistant: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
       tableName: test_agent_info
+      storageBucket: monument-images
+      monumentImageDisplay: !<reference.Image> 00000000-0000-0000-0000-000000000000
       debugMode: true
       printDbInfoOnStart: false
   ScriptTypes:
@@ -52,6 +56,8 @@
     - '// @input AssignableType snapCloudRequirements {"hint":"Reference to SnapCloudRequirements for Supabase configuration"}'
     - '// @input AssignableType_1 geminiAssistant {"hint":"Reference to the GeminiAssistant component"}'
     - '// @input string tableName = "test_agent_info" {"hint":"Name of the table containing monument information"}'
+    - '// @input string storageBucket = "monument-images" {"hint":"Name of the Supabase Storage bucket containing monument images"}'
+    - '// @input Component.Image monumentImageDisplay {"hint":"Image component to display loaded monument images"}'
     - '// @ui {"widget":"separator"}'
     - '// @ui {"widget":"group_start", "label":"Debug Settings"}'
     - // @input bool debugMode = true

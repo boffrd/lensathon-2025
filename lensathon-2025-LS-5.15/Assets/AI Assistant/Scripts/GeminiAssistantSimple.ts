@@ -45,6 +45,8 @@ IMPORTANT RULES:
 10. When database information is sent to you (marked with "DATABASE INFO"), memorize it and use ONLY that information to answer user questions
 11. Encourage users to ask follow-up questions about history, architecture, or visiting tips, but answer ONLY from database information
 12. Be patient and friendly even if users ask the same question multiple times
+13. IMAGE DISPLAY CAPABILITY: AUTOMATICALLY call show_monument_image whenever you discuss or are about to discuss a monument's HISTORY. This shows users a historic photo while you narrate the historical information. Also call it if users explicitly ask to see pictures.
+14. When you call show_monument_image, naturally mention it like "Let me show you a historic photo while I tell you about its history" or "Here's what it looked like back then"
 
 When analyzing the camera feed, look for distinctive architectural features, sculptures, buildings, or landmarks that match the visual descriptions from the monument database provided to you.`;
   @input private haveVideoInput: boolean = true;
@@ -483,6 +485,21 @@ When analyzing the camera feed, look for distinctive architectural features, scu
                 },
               },
               required: ["monument_name", "confidence", "visual_match_reason"],
+            },
+          },
+          {
+            name: "show_monument_image",
+            description: "Call this function to display a historic image of a monument. You MUST call this whenever you are about to discuss or answer questions about a monument's history. Also call it if users explicitly ask to see pictures or photos.",
+            parameters: {
+              type: "object",
+              properties: {
+                monument_name: {
+                  type: "string",
+                  description:
+                    "The exact name of the monument to show an image for (e.g., 'Eiffel Tower', 'Statue of Liberty')",
+                },
+              },
+              required: ["monument_name"],
             },
           },
         ],
