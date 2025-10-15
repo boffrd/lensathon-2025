@@ -26,13 +26,17 @@
   ExportUid: 00000000-0000-0000-0000-000000000000
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
+    animationPlayer: false
     audioThreshold: false
     dynamicAudioOutput: false
     haveAudioOutput: false
     haveVideoInput: false
+    idleAnimationName: false
     instructions: false
+    listeningAnimationName: false
     microphoneRecorder: false
     silenceTimeout: false
+    talkingAnimationName: false
     voice: false
     websocketRequirementsObj: false
   ScriptTypesHidden:
@@ -47,6 +51,10 @@
     - websocketRequirementsObj: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       dynamicAudioOutput: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
       microphoneRecorder: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
+      animationPlayer: !<reference.AnimationPlayer> 00000000-0000-0000-0000-000000000000
+      idleAnimationName: idle
+      listeningAnimationName: listening
+      talkingAnimationName: talking
       instructions: You are a helpful assistant that loves to make puns
       haveVideoInput: false
       haveAudioOutput: false
@@ -65,6 +73,17 @@
     - // @input SceneObject websocketRequirementsObj
     - // @input AssignableType dynamicAudioOutput
     - // @input AssignableType_1 microphoneRecorder
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"group_start", "label":"Animation"}'
+    - // @input Component.AnimationPlayer animationPlayer
+    - "// @ui {\"widget\":\"label\", \"label\":\"AnimationPlayer for controlling Freddy's animations\"}"
+    - '// @input string idleAnimationName = "idle"'
+    - '// @ui {"widget":"label", "label":"Name of the idle animation clip"}'
+    - '// @input string listeningAnimationName = "listening"'
+    - '// @ui {"widget":"label", "label":"Name of the listening animation clip"}'
+    - '// @input string talkingAnimationName = "talking"'
+    - '// @ui {"widget":"label", "label":"Name of the talking animation clip"}'
     - '// @ui {"widget":"group_end"}'
     - '// @ui {"widget":"separator"}'
     - '// @ui {"widget":"group_start", "label":"Inputs"}'

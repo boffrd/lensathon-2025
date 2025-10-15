@@ -26,6 +26,21 @@ export class GeminiAssistant extends BaseScriptComponent {
   @input private microphoneRecorder: MicrophoneRecorder;
   @ui.group_end
   @ui.separator
+  @ui.group_start("Animation")
+  @input
+  @ui.label("AnimationPlayer for controlling Freddy's animations")
+  private animationPlayer: AnimationPlayer;
+  @input
+  @ui.label("Name of the idle animation clip")
+  private idleAnimationName: string = "idle";
+  @input
+  @ui.label("Name of the listening animation clip")
+  private listeningAnimationName: string = "listening";
+  @input
+  @ui.label("Name of the talking animation clip")
+  private talkingAnimationName: string = "talking";
+  @ui.group_end
+  @ui.separator
   @ui.group_start("Inputs")
   @input
   @widget(new TextAreaWidget())
@@ -113,6 +128,10 @@ When analyzing the camera feed, look for distinctive architectural features, scu
   private lastAudioTime: number = 0;
   private silenceCheckToken: CancelToken | null = null;
   private isMonitoring: boolean = false;
+  
+  // Track when AI should finish talking based on text length
+  private talkingEndTime: number = 0;
+  private talkingMonitorToken: CancelToken | null = null;
 
   public updateTextEvent: Event<{ text: string; completed: boolean }> =
     new Event<{ text: string; completed: boolean }>();
@@ -144,6 +163,106 @@ When analyzing the camera feed, look for distinctive architectural features, scu
       this.currentState = newState;
       print(`🤖 [AI State] Changed to: ${newState.toUpperCase()}`);
       this.stateChangeEvent.invoke({ state: newState });
+      
+      // Control animations based on state
+      this.playAnimationForState(newState);
+    }
+  }
+
+  /**
+   * Play the appropriate animation for the current state
+   * Smoothly blends between animations using weight tweening over 0.5 seconds
+   */
+  private playAnimationForState(state: "idle" | "listening" | "talking"): void {
+    if (!this.animationPlayer) {
+      print("⚠️ AnimationPlayer not assigned in inspector");
+      return;
+    }
+
+    // Determine which animation to play
+    let animationName: string;
+    switch (state) {
+      case "idle":
+        animationName = this.idleAnimationName;
+        break;
+      case "listening":
+        animationName = this.listeningAnimationName;
+        break;
+      case "talking":
+        animationName = this.talkingAnimationName;
+        break;
+    }
+
+    if (!animationName) {
+      print(`⚠️ No animation name configured for state: ${state}`);
+      return;
+    }
+
+    try {
+      // Verify the new clip exists
+      const newClip = this.animationPlayer.getClip(animationName);
+      if (!newClip) {
+        print(`⚠️ Animation clip not found: ${animationName}`);
+        print(`Available clips: ${this.animationPlayer.clips.map(c => c.name).join(", ")}`);
+        return;
+      }
+
+      // Configure the new clip
+      newClip.playbackMode = PlaybackMode.Loop;
+      newClip.disabled = false;
+      newClip.weight = 0; // Start at 0 weight for smooth blend-in
+      
+      // Start playing the new clip
+      this.animationPlayer.setClipEnabled(animationName, true);
+      this.animationPlayer.playClip(animationName);
+
+      // Smoothly transition weights over 0.5 seconds
+      const transitionDuration = 0.5;
+      const allClips = this.animationPlayer.clips;
+      
+      // Collect currently playing clips (excluding the new one)
+      const fadingOutClips: AnimationClip[] = [];
+      if (allClips) {
+        for (let i = 0; i < allClips.length; i++) {
+          const clip = allClips[i];
+          if (clip.name !== animationName && this.animationPlayer.getClipIsPlaying(clip.name)) {
+            fadingOutClips.push(clip);
+          }
+        }
+      }
+
+      // Animate the weight transition
+      const startTime = getTime();
+      const updateEvent = this.createEvent("UpdateEvent");
+      updateEvent.bind((eventData) => {
+        const elapsed = getTime() - startTime;
+        const t = Math.min(elapsed / transitionDuration, 1.0); // Clamp to [0, 1]
+        
+        // Fade in new animation
+        newClip.weight = t;
+        
+        // Fade out old animations
+        for (let i = 0; i < fadingOutClips.length; i++) {
+          fadingOutClips[i].weight = 1.0 - t;
+        }
+        
+        // When transition is complete
+        if (t >= 1.0) {
+          // Stop old animations
+          for (let i = 0; i < fadingOutClips.length; i++) {
+            this.animationPlayer.stopClip(fadingOutClips[i].name);
+            print(`⏹️ Stopped animation: ${fadingOutClips[i].name}`);
+          }
+          
+          // Remove this update event
+          this.removeEvent(updateEvent);
+          print(`🎬 Animation transition complete: ${animationName} for state: ${state}`);
+        }
+      });
+
+      print(`🎬 Transitioning to animation: ${animationName} for state: ${state} (0.5s blend)`);
+    } catch (e) {
+      print(`⚠️ Error controlling animation ${animationName}: ${e}`);
     }
   }
 
@@ -172,7 +291,9 @@ When analyzing the camera feed, look for distinctive architectural features, scu
     this.GeminiLive.onOpen.add((event) => {
       print("Connection opened");
       this.sessionSetup();
-      this.setState("idle");
+      // Set initial state and play idle animation
+      this.currentState = "idle";
+      this.playAnimationForState("idle");
     });
 
     let completedTextDisplay = true;
@@ -220,41 +341,47 @@ When analyzing the camera feed, look for distinctive architectural features, scu
         }
         // Show output transcription
         else if (message?.serverContent?.outputTranscription?.text) {
+          const text = message.serverContent.outputTranscription?.text;
           if (completedTextDisplay) {
             this.updateTextEvent.invoke({
-              text: message.serverContent.outputTranscription?.text,
+              text: text,
               completed: true,
             });
           } else {
             this.updateTextEvent.invoke({
-              text: message.serverContent.outputTranscription?.text,
+              text: text,
               completed: false,
             });
           }
           completedTextDisplay = false;
+          // Estimate talking duration based on text length
+          this.estimateTalkingDuration(text);
         }
 
         // Show text response
         else if (message?.serverContent?.modelTurn?.parts?.[0]?.text) {
+          const text = message.serverContent.modelTurn.parts[0].text;
           if (completedTextDisplay) {
             this.updateTextEvent.invoke({
-              text: message.serverContent.modelTurn.parts[0].text,
+              text: text,
               completed: true,
             });
           } else {
             this.updateTextEvent.invoke({
-              text: message.serverContent.modelTurn.parts[0].text,
+              text: text,
               completed: false,
             });
           }
           completedTextDisplay = false;
+          // Estimate talking duration based on text length
+          this.estimateTalkingDuration(text);
         }
 
         // Determine if the response is complete
         else if (message?.serverContent?.turnComplete) {
           completedTextDisplay = true;
-          // When turn is complete, go back to idle (will switch to listening when user speaks)
-          this.setState("idle");
+          // Start monitoring for when talking should end
+          this.startTalkingDurationMonitor();
         }
       }
 
@@ -387,6 +514,57 @@ When analyzing the camera feed, look for distinctive architectural features, scu
       clearTimeout(this.silenceCheckToken);
       this.silenceCheckToken = null;
     }
+  }
+
+  /**
+   * Estimate talking duration based on text length
+   * Average speaking rate: ~2.5 words per second (150 words per minute)
+   * Duration is extended by 20% to ensure animation doesn't cut off early
+   */
+  private estimateTalkingDuration(text: string): void {
+    if (!text) return;
+    
+    // Count words (split by whitespace)
+    const wordCount = text.trim().split(/\s+/).length;
+    
+    // Estimate duration: words / 2.5 words per second + 0.5s buffer
+    const baseDuration = (wordCount / 2.5) + 0.5;
+    
+    // Add 55% extra time to ensure animation doesn't cut off early
+    const estimatedDuration = baseDuration * 1.55;
+    
+    // Update the end time (keep extending it as more text arrives)
+    this.talkingEndTime = Math.max(this.talkingEndTime, getTime() + estimatedDuration);
+    
+    print(`📊 Text: ${wordCount} words, base: ${baseDuration.toFixed(1)}s, with 20% buffer: ${estimatedDuration.toFixed(1)}s`);
+  }
+
+  /**
+   * Start monitoring for when talking should end based on estimated duration
+   */
+  private startTalkingDurationMonitor(): void {
+    // Stop existing monitoring if any
+    if (this.talkingMonitorToken) {
+      clearTimeout(this.talkingMonitorToken);
+    }
+
+    const checkTalkingComplete = () => {
+      const currentTime = getTime();
+      
+      // If we've passed the talking end time, transition to idle
+      if (currentTime >= this.talkingEndTime) {
+        print("🔇 Talking duration complete, transitioning to idle");
+        this.setState("idle");
+        this.talkingEndTime = 0;
+      } else {
+        // Keep checking every 100ms
+        const remainingTime = this.talkingEndTime - currentTime;
+        this.talkingMonitorToken = setTimeout(checkTalkingComplete, Math.min(remainingTime * 1000, 100));
+      }
+    };
+
+    // Start monitoring
+    checkTalkingComplete();
   }
 
   private setupInputs() {
