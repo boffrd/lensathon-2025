@@ -34,9 +34,15 @@
     closeButtonInteractable: false
     closeObj: false
     distanceToUser: false
+    enableHoverAnimation: false
     geminiAssistant: false
+    horizontalSpeedMultiplier: false
+    hoverAnimationDuration: false
+    hoverHorizontalDistance: false
     hoverMat: false
+    hoverVerticalDistance: false
     lerpIntensity: false
+    movementTarget: false
     orbInteractableObj: false
     orbObject: false
     orbScreenPosition: false
@@ -45,6 +51,7 @@
     returnToViewSpeed: false
     screenSpaceText: false
     uiParent: false
+    verticalSpeedMultiplier: false
     worldSpaceText: false
   ScriptTypesHidden:
     {}
@@ -59,6 +66,13 @@
       distanceToUser: !<float> 80.000000
       positionOffset: !<Vec3> {x: -15.000000, y: -10.000000, z: 0.000000}
       returnToViewSpeed: 0.300000
+      enableHoverAnimation: true
+      hoverVerticalDistance: !<float> 3.000000
+      hoverHorizontalDistance: !<float> 2.000000
+      hoverAnimationDuration: !<float> 7.000000
+      verticalSpeedMultiplier: !<float> 1.000000
+      horizontalSpeedMultiplier: 0.700000
+      movementTarget: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       geminiAssistant: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       audioReactiveMultiplier: !<float> 2.000000
       audioSmoothingFactor: 0.200000
@@ -83,14 +97,31 @@
     - '// @ui {"widget":"label", "label":"Manages the UI and hand intereactions for the AI assistant"}'
     - '// @ui {"widget":"separator"}'
     - '// @ui {"widget":"group_start", "label":"Orb Positioning Settings"}'
-    - '// @input float lerpIntensity = 0.15 {"widget":"slider", "min":0.01, "max":1, "step":0.01}'
+    - // @input float lerpIntensity = 0.15
     - '// @ui {"widget":"label", "label":"Controls how smoothly the orb follows the user (lower = smoother)"}'
-    - '// @input float distanceToUser = 60 {"widget":"slider", "min":30, "max":200, "step":1}'
+    - // @input float distanceToUser = 60
     - '// @ui {"widget":"label", "label":"Distance from user to the orb"}'
     - "// @input vec3 positionOffset = {20,5,0}"
     - '// @ui {"widget":"label", "label":"Position offset relative to user (right, up, forward)"}'
-    - '// @input float returnToViewSpeed = 0.3 {"widget":"slider", "min":0.01, "max":0.5, "step":0.01}'
+    - // @input float returnToViewSpeed = 0.3
     - '// @ui {"widget":"label", "label":"How quickly orb returns to view when out of FOV"}'
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"group_start", "label":"Hover/Float Animation (Jetpack Effect)"}'
+    - // @input bool enableHoverAnimation = true
+    - '// @ui {"widget":"label", "label":"Enable floating/hovering animation loop"}'
+    - // @input float hoverVerticalDistance = 3
+    - '// @ui {"widget":"label", "label":"Vertical hover distance (up/down movement)"}'
+    - // @input float hoverHorizontalDistance = 2
+    - '// @ui {"widget":"label", "label":"Horizontal hover distance (left/right movement)"}'
+    - // @input float hoverAnimationDuration = 7
+    - '// @ui {"widget":"label", "label":"Animation loop duration (seconds)"}'
+    - // @input float verticalSpeedMultiplier = 1
+    - '// @ui {"widget":"label", "label":"Vertical speed multiplier (affects up/down frequency)"}'
+    - // @input float horizontalSpeedMultiplier = 0.7
+    - '// @ui {"widget":"label", "label":"Horizontal speed multiplier (affects left/right frequency)"}'
+    - // @input SceneObject movementTarget
+    - '// @ui {"widget":"label", "label":"Movement target (orb will apply hover animation to this object)"}'
     - '// @ui {"widget":"group_end"}'
     - '// @ui {"widget":"separator"}'
     - '// @ui {"widget":"group_start", "label":"Audio Reactivity"}'

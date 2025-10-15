@@ -31,12 +31,10 @@ export class SphereController extends BaseScriptComponent {
   
   @ui.group_start("Orb Positioning Settings")
   @input
-  @widget(new SliderWidget(0.01, 1.0, 0.01))
   @ui.label("Controls how smoothly the orb follows the user (lower = smoother)")
   private lerpIntensity: number = 0.15; // Increased for more responsive following
 
   @input
-  @widget(new SliderWidget(30, 200, 1))
   @ui.label("Distance from user to the orb")
   private distanceToUser: number = 60; // Closer to user for better visibility
 
@@ -45,9 +43,39 @@ export class SphereController extends BaseScriptComponent {
   private positionOffset: vec3 = new vec3(20, 5, 0); // Positive values for right/up, 0 forward
   
   @input
-  @widget(new SliderWidget(0.01, 0.5, 0.01))
   @ui.label("How quickly orb returns to view when out of FOV")
   private returnToViewSpeed: number = 0.3;
+  @ui.group_end
+
+  @ui.separator
+  @ui.group_start("Hover/Float Animation (Jetpack Effect)")
+  @input
+  @ui.label("Enable floating/hovering animation loop")
+  private enableHoverAnimation: boolean = true;
+  
+  @input
+  @ui.label("Vertical hover distance (up/down movement)")
+  private hoverVerticalDistance: number = 3.0;
+  
+  @input
+  @ui.label("Horizontal hover distance (left/right movement)")
+  private hoverHorizontalDistance: number = 2.0;
+  
+  @input
+  @ui.label("Animation loop duration (seconds)")
+  private hoverAnimationDuration: number = 7.0;
+  
+  @input
+  @ui.label("Vertical speed multiplier (affects up/down frequency)")
+  private verticalSpeedMultiplier: number = 1.0;
+  
+  @input
+  @ui.label("Horizontal speed multiplier (affects left/right frequency)")
+  private horizontalSpeedMultiplier: number = 0.7;
+  
+  @input
+  @ui.label("Movement target (orb will apply hover animation to this object)")
+  private movementTarget: SceneObject;
   @ui.group_end
 
   @ui.separator
@@ -157,6 +185,10 @@ export class SphereController extends BaseScriptComponent {
   private readonly SILENCE_THRESHOLD = 0.01;
   private readonly SILENCE_TIMEOUT = 200; // ms
 
+  // Hover animation properties
+  private hoverAnimationTime: number = 0;
+  private hoverOffset: vec3 = vec3.zero();
+
   public isActivatedEvent: Event<boolean> = new Event<boolean>();
 
   onAwake() {
@@ -221,6 +253,44 @@ export class SphereController extends BaseScriptComponent {
       
     // Ensure orb stays in field of view by adjusting position if needed
     this.adjustForFieldOfView();
+  }
+  
+  /**
+   * Update the hover animation to create a floating jetpack-like effect
+   * Creates smooth sinusoidal motion in vertical and horizontal directions
+   */
+  private updateHoverAnimation() {
+    // Increment animation time based on delta time
+    const deltaTime = getDeltaTime();
+    this.hoverAnimationTime += deltaTime;
+    
+    // Prevent time from growing infinitely
+    if (this.hoverAnimationTime > this.hoverAnimationDuration * 100) {
+      this.hoverAnimationTime = 0;
+    }
+    
+    // Calculate normalized time (0 to 1) based on animation duration
+    const frequency = 1.0 / this.hoverAnimationDuration;
+    const time = this.hoverAnimationTime * frequency;
+    
+    // Create vertical (up/down) motion using sine wave
+    // Use different frequency for vertical motion to create more natural feel
+    const verticalPhase = time * Math.PI * 2 * this.verticalSpeedMultiplier;
+    const verticalOffset = Math.sin(verticalPhase) * this.hoverVerticalDistance;
+    
+    // Create horizontal (left/right) motion using cosine wave
+    // Offset by 90 degrees (cosine) for figure-8 or circular motion
+    // Use different frequency for horizontal to avoid perfect synchronization
+    const horizontalPhase = time * Math.PI * 2 * this.horizontalSpeedMultiplier;
+    const horizontalOffset = Math.cos(horizontalPhase) * this.hoverHorizontalDistance;
+    
+    // Apply the hover offset
+    this.hoverOffset = new vec3(horizontalOffset, verticalOffset, 0);
+    
+    // Debug output (log every 60 frames to avoid spam)
+    if (Math.floor(this.hoverAnimationTime * 60) % 60 === 0) {
+      print(`[SphereController] Hover Animation - Vertical: ${verticalOffset.toFixed(2)}, Horizontal: ${horizontalOffset.toFixed(2)}`);
+    }
   }
   
   /**
@@ -504,6 +574,11 @@ export class SphereController extends BaseScriptComponent {
 
   private updateOrbPosition() {
     // Always update position for both states - orb should follow user regardless of size
+    if (!this.orbObject) {
+      print("[SphereController] WARNING: orbObject is null!");
+      return;
+    }
+    
     let objectToTransform = this.orbObject.getTransform();
     
     // Use different lerp speeds based on state for better UX
@@ -513,6 +588,18 @@ export class SphereController extends BaseScriptComponent {
     let newPosition = vec3.lerp(currentPosition, this.targetPosition, currentLerpSpeed);
     objectToTransform.setWorldPosition(newPosition);
     
+    // Apply hover animation to the movement target
+    if (this.enableHoverAnimation) {
+      this.updateHoverAnimation();
+      this.applyHoverToVisualParent();
+    } else {
+      this.hoverOffset = vec3.zero();
+      const targetObject = this.movementTarget ? this.movementTarget : this.orbVisualParent;
+      if (targetObject) {
+        targetObject.getTransform().setLocalPosition(vec3.zero());
+      }
+    }
+    
     // Also update close button position when expanded
     if (!this.trackedToHand && this.closeObj) {
       let closeTransform = this.closeObj.getTransform();
@@ -520,6 +607,23 @@ export class SphereController extends BaseScriptComponent {
       let closeNewPos = vec3.lerp(closeCurrentPos, this.targetPosition, currentLerpSpeed);
       closeTransform.setWorldPosition(closeNewPos);
     }
+  }
+  
+  /**
+   * Apply hover animation offset to the visual parent in local space
+   */
+  private applyHoverToVisualParent() {
+    // Use movementTarget if specified, otherwise fall back to orbVisualParent
+    const targetObject = this.movementTarget ? this.movementTarget : this.orbVisualParent;
+    
+    if (!targetObject) {
+      print("[SphereController] WARNING: No movement target or orbVisualParent set!");
+      return;
+    }
+    
+    // Apply the hover offset in local space relative to the orb object
+    // This creates the floating effect without interfering with the position tracking
+    targetObject.getTransform().setLocalPosition(this.hoverOffset);
   }
 
   private updateOrbRotation() {
