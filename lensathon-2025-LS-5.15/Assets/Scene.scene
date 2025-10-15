@@ -7,6 +7,7 @@
     - !<own> 817d42af-833b-4a9e-aca6-84fe36f922c4
     - !<own> 3075ea54-a9a9-4900-af69-fa299138464a
     - !<own> 15aa9eef-0ff3-4378-a54b-8071acced9a0
+    - !<own> 5a8a7fa4-10b9-4a76-ab9f-15abb386c27b
   layers: !<Layers/267ee9a7-aff2-4f9d-9a49-f71214747d03>
     userLayers:
       []
@@ -1377,6 +1378,22 @@
   Enabled: true
   AnimationLayers:
     BaseLayer: !<reference> a9e0d183-1e2b-4e9e-886d-9c9f5445af9d
+- !<ScriptComponent/52ef4a4b-dd97-480a-a79c-337c94dac700>
+  PrefabRemaps:
+    []
+  Name: Example_YoyoTween
+  Enabled: false
+  ScriptAsset: !<reference> 5046827d-bec2-49a2-b3a9-efcb883113dd
+  ScriptInputsDefault:
+    {}
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      {}
+  ScriptTypes:
+    "":
+      {}
 - !<SceneObject/541a1667-fb17-43bf-bd3b-7b713063d3f7>
   PrefabRemaps:
     []
@@ -1624,6 +1641,22 @@
     - !<own> c1e4cdd6-40ff-4bbf-94e2-490af58b9b1d
   Components:
     []
+- !<SceneObject/5a8a7fa4-10b9-4a76-ab9f-15abb386c27b>
+  PrefabRemaps:
+    []
+  Name: Jetpack VFX
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: -24.119787}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 9de3be21-fa0d-44a7-a715-a172476a408d
+    - !<own> c10a5835-13a6-411c-acd4-0eee7545abd7
+  Components:
+    - !<own> 52ef4a4b-dd97-480a-a79c-337c94dac700
 - !<SceneObject/5aa0f98b-e799-448c-a2dc-cae5d04fa2a4>
   PrefabRemaps:
     - 00fdb93a-85d7-4497-9622-9fad02238fc3: 6a3dbaa3-d10c-4f71-7bf2-d4747e7b4983
@@ -1841,6 +1874,19 @@
   BlendNormals: false
   BlendShapes:
     {}
+- !<VFXComponent/60cd81ea-8ce1-4c67-bd5c-c140cb4bad8a>
+  PrefabRemaps:
+    []
+  Name: VFX Component
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  VFXAsset: !<reference> c65fc437-ffcf-4efb-8f47-dd31cc877dae
 - !<ScriptComponent/63b3e706-eddb-42bf-b0aa-e7f437bd4c6d>
   PrefabRemaps:
     []
@@ -2054,6 +2100,26 @@
     - !<own> b9527455-3058-4cc8-9255-783169419f0d
   Components:
     []
+- !<RenderMeshVisual/74ec664f-8735-4fe9-9b2c-17419239af70>
+  PrefabRemaps:
+    []
+  Name: Render Mesh Visual
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 0dd970bd-5f9c-4a3f-9268-cc148a769693
+  Mesh: !<reference> cd71eff3-85a5-4a32-b038-ccbf5fef298c
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
 - !<SceneObject/76242dde-38d4-48b6-bb6b-a0419db21dad>
   PrefabRemaps:
     []
@@ -2253,7 +2319,7 @@
   PrefabRemaps:
     []
   Name: "[SnapCloudRequirements]"
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform: !<TransformEntity>
     Position: {x: 0.000000, y: 0.000000, z: 0.000000}
@@ -2590,6 +2656,21 @@
   ScriptTypes:
     "":
       {}
+- !<SceneObject/9de3be21-fa0d-44a7-a715-a172476a408d>
+  PrefabRemaps:
+    []
+  Name: Flame Cone
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: -0.000000, z: 180.000000}
+    Scale: {x: 5.000000, y: 10.000000, z: 5.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 74ec664f-8735-4fe9-9b2c-17419239af70
 - !<RenderMeshVisual/9f3cd5c5-dce4-4af6-b918-94c05c6befc6>
   PrefabRemaps:
     []
@@ -3310,6 +3391,21 @@
     CapitalizationOverride: None
   DepthTest: false
   TwoSided: false
+- !<SceneObject/c10a5835-13a6-411c-acd4-0eee7545abd7>
+  PrefabRemaps:
+    []
+  Name: Smoke Emitter
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 1.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 60cd81ea-8ce1-4c67-bd5c-c140cb4bad8a
 - !<SceneObject/c1e4cdd6-40ff-4bbf-94e2-490af58b9b1d>
   PrefabRemaps:
     []
