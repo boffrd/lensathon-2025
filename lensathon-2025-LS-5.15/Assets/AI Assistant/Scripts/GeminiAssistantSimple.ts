@@ -531,7 +531,7 @@ When analyzing the camera feed, look for distinctive architectural features, scu
     const baseDuration = (wordCount / 2.5) + 0.5;
     
     // Add 55% extra time to ensure animation doesn't cut off early
-    const estimatedDuration = baseDuration * 1.55;
+    const estimatedDuration = baseDuration * 1.8;
     
     // Update the end time (keep extending it as more text arrives)
     this.talkingEndTime = Math.max(this.talkingEndTime, getTime() + estimatedDuration);

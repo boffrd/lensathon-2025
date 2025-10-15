@@ -302,7 +302,7 @@
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: -28.808945}
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
     Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
     Scale: {x: 12.000000, y: 12.000000, z: 12.000000}
     HasSegmentScaleCompensation: false
@@ -2127,6 +2127,7 @@
   Enabled: true
   ScriptAsset: !<reference> 2e6f8804-4c5f-4f4c-9507-fd7b54576469
   ScriptInputsDefault:
+    lerpIntensity: true
     enableHoverAnimation: true
     hoverAnimationDuration: true
     verticalSpeedMultiplier: true
@@ -2139,7 +2140,7 @@
     {}
   ScriptInputs:
     "":
-      lerpIntensity: 0.200000
+      lerpIntensity: 0.100000
       distanceToUser: !<float> 180.000000
       positionOffset: !<Vec3> {x: 0.000000, y: -8.000000, z: -100.000000}
       returnToViewSpeed: 0.200000
@@ -4323,7 +4324,7 @@
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 34.243958, z: 0.000000}
+    Position: {x: 0.000000, y: 65.000000, z: 0.000000}
     Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
     Scale: {x: 32.000000, y: 32.000000, z: 32.000000}
     HasSegmentScaleCompensation: false
