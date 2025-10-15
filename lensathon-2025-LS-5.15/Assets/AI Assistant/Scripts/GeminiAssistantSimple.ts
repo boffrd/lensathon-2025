@@ -129,9 +129,11 @@ When analyzing the camera feed, look for distinctive architectural features, scu
   private silenceCheckToken: CancelToken | null = null;
   private isMonitoring: boolean = false;
   
-  // Track when AI should finish talking based on text length
-  private talkingEndTime: number = 0;
+  // Track when AI should finish talking based on audio reception
+  private lastAudioFrameTime: number = 0;
   private talkingMonitorToken: CancelToken | null = null;
+  private hasReceivedAudio: boolean = false;
+  private turnCompleteReceived: boolean = false;
 
   public updateTextEvent: Event<{ text: string; completed: boolean }> =
     new Event<{ text: string; completed: boolean }>();
@@ -333,6 +335,15 @@ When analyzing the camera feed, look for distinctive architectural features, scu
           this.dynamicAudioOutput.addAudioFrame(audio);
           // AI is talking when sending audio
           this.setState("talking");
+          
+          // Track when we last received audio
+          this.lastAudioFrameTime = getTime();
+          this.hasReceivedAudio = true;
+          
+          // If turnComplete was already received, start monitoring
+          if (this.turnCompleteReceived && !this.talkingMonitorToken) {
+            this.startTalkingDurationMonitor();
+          }
         }
         if (message.serverContent.interrupted) {
           this.dynamicAudioOutput.interruptAudioOutput();
@@ -354,8 +365,6 @@ When analyzing the camera feed, look for distinctive architectural features, scu
             });
           }
           completedTextDisplay = false;
-          // Estimate talking duration based on text length
-          this.estimateTalkingDuration(text);
         }
 
         // Show text response
@@ -373,18 +382,17 @@ When analyzing the camera feed, look for distinctive architectural features, scu
             });
           }
           completedTextDisplay = false;
-          // Estimate talking duration based on text length
-          this.estimateTalkingDuration(text);
         }
 
         // Determine if the response is complete
         else if (message?.serverContent?.turnComplete) {
           completedTextDisplay = true;
-          // Add 3 seconds buffer after turn complete to ensure all audio finishes
-          this.talkingEndTime = Math.max(this.talkingEndTime, getTime() + 3.0);
-          print(`⏱️ Turn complete, added 3s buffer. End time: ${this.talkingEndTime.toFixed(1)}`);
-          // Start monitoring for when talking should end
-          this.startTalkingDurationMonitor();
+          this.turnCompleteReceived = true;
+          print(`✅ Turn complete received`);
+          // Only start transition timer if we've actually received audio
+          if (this.hasReceivedAudio && !this.talkingMonitorToken) {
+            this.startTalkingDurationMonitor();
+          }
         }
       }
 
@@ -519,31 +527,11 @@ When analyzing the camera feed, look for distinctive architectural features, scu
     }
   }
 
-  /**
-   * Estimate talking duration based on text length
-   * Average speaking rate: ~2.5 words per second (150 words per minute)
-   * Duration is extended by 20% to ensure animation doesn't cut off early
-   */
-  private estimateTalkingDuration(text: string): void {
-    if (!text) return;
-    
-    // Count words (split by whitespace)
-    const wordCount = text.trim().split(/\s+/).length;
-    
-    // Estimate duration: words / 2.5 words per second + 1s buffer
-    const baseDuration = (wordCount / 2.5) + 1.0;
-    
-    // Multiply by 5x to ensure animation lasts through entire speech with plenty of buffer
-    const estimatedDuration = baseDuration * 4.0;
-    
-    // Update the end time (keep extending it as more text arrives)
-    this.talkingEndTime = Math.max(this.talkingEndTime, getTime() + estimatedDuration);
-    
-    print(`📊 Text: ${wordCount} words, base: ${baseDuration.toFixed(1)}s, extended: ${estimatedDuration.toFixed(1)}s`);
-  }
+
 
   /**
-   * Start monitoring for when talking should end based on estimated duration
+   * Start monitoring for when talking should end
+   * Waits for 2 seconds after the last audio frame before transitioning to idle
    */
   private startTalkingDurationMonitor(): void {
     // Stop existing monitoring if any
@@ -553,20 +541,23 @@ When analyzing the camera feed, look for distinctive architectural features, scu
 
     const checkTalkingComplete = () => {
       const currentTime = getTime();
+      const timeSinceLastAudio = currentTime - this.lastAudioFrameTime;
       
-      // If we've passed the talking end time, transition to idle
-      if (currentTime >= this.talkingEndTime) {
-        print("🔇 Talking duration complete, transitioning to idle");
+      // Wait 4 seconds after last audio frame before transitioning to idle (2x longer)
+      if (timeSinceLastAudio >= 6.0) {
+        print(`🔇 No audio for ${timeSinceLastAudio.toFixed(1)}s, transitioning to idle`);
         this.setState("idle");
-        this.talkingEndTime = 0;
+        this.hasReceivedAudio = false;
+        this.turnCompleteReceived = false;
+        this.talkingMonitorToken = null;
       } else {
-        // Keep checking every 100ms
-        const remainingTime = this.talkingEndTime - currentTime;
-        this.talkingMonitorToken = setTimeout(checkTalkingComplete, Math.min(remainingTime * 1000, 100));
+        // Keep checking every 200ms
+        this.talkingMonitorToken = setTimeout(checkTalkingComplete, 200);
       }
     };
 
     // Start monitoring
+    print(`🎙️ Started monitoring audio completion`);
     checkTalkingComplete();
   }
 
