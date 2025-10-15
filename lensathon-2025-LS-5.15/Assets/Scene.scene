@@ -997,7 +997,7 @@
   LocalTransform: !<TransformEntity>
     Position: {x: 0.000000, y: 5.000000, z: 5.000000}
     Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 0.200000, y: 0.200000, z: 0.200000}
+    Scale: {x: 0.500000, y: 0.500000, z: 0.500000}
     HasSegmentScaleCompensation: false
   Children:
     - !<own> 18bca114-ccd5-42d5-bf2a-4c73ddb68b5f
@@ -1788,7 +1788,7 @@
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Position: {x: 0.000000, y: -20.000000, z: 90.000000}
     Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
     Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     HasSegmentScaleCompensation: false
@@ -2140,12 +2140,12 @@
   ScriptInputs:
     "":
       lerpIntensity: 0.200000
-      distanceToUser: !<float> 35.000000
+      distanceToUser: !<float> 180.000000
       positionOffset: !<Vec3> {x: 0.000000, y: -8.000000, z: -100.000000}
       returnToViewSpeed: 0.200000
       enableHoverAnimation: true
-      hoverVerticalDistance: !<float> 10.000000
-      hoverHorizontalDistance: !<float> 10.000000
+      hoverVerticalDistance: !<float> 30.000000
+      hoverHorizontalDistance: !<float> 30.000000
       hoverAnimationDuration: !<float> 7.000000
       verticalSpeedMultiplier: !<float> 1.000000
       horizontalSpeedMultiplier: 0.200000
@@ -4874,7 +4874,7 @@
   ShowEditingPreview: true
   TouchHandler: !<reference> 00000000-0000-0000-0000-000000000000
   SizeToFit: false
-  FontSize: 48
+  FontSize: 80
   Font: !<reference> 00000000-0000-0000-0000-000000000000
   LayoutRect:
     left: -10.000000
