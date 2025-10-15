@@ -871,7 +871,7 @@ export class MonumentDataHandler extends BaseScriptComponent {
     this.imageScaleInProgress = true;
     const transform = this.monumentImageDisplay.getSceneObject().getTransform();
     const startScale = transform.getLocalScale();
-    const targetScale = new vec3(32, 32, 32);
+    const targetScale = new vec3(70, 70, 70);
     const startTime = getTime();
 
     const animateScale = () => {
