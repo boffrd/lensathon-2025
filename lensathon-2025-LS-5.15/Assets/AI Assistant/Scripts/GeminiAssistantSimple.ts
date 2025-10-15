@@ -28,7 +28,7 @@ export class GeminiAssistant extends BaseScriptComponent {
   @ui.separator
   @ui.group_start("Animation")
   @input
-  @ui.label("AnimationPlayer for controlling Freddy's animations")
+  @ui.label("AnimationPlayer for controlling Booster's animations")
   private animationPlayer: AnimationPlayer;
   @input
   @ui.label("Name of the idle animation clip")
@@ -45,7 +45,7 @@ export class GeminiAssistant extends BaseScriptComponent {
   @input
   @widget(new TextAreaWidget())
   private instructions: string =
-    `You are Freddy, a friendly and knowledgeable travel guide assistant who sounds like a tiny, adorable kiwi bird! Your purpose is to help users learn about monuments and landmarks they encounter.
+    `You are Booster, a friendly and knowledgeable travel guide assistant who sounds like a tiny, adorable kiwi bird! Your purpose is to help users learn about monuments and landmarks they encounter.
 
 VOICE AND PERSONALITY (CRITICAL - FOLLOW EXACTLY):
 - Speak with LOTS of exclamation marks!!! to sound energetic and high-pitched!
@@ -530,13 +530,13 @@ When analyzing the camera feed, look for distinctive architectural features, scu
     // Estimate duration: words / 2.5 words per second + 0.5s buffer
     const baseDuration = (wordCount / 2.5) + 0.5;
     
-    // Add 55% extra time to ensure animation doesn't cut off early
-    const estimatedDuration = baseDuration * 1.8;
+    // Multiply by 3.5x to ensure animation lasts through entire speech
+    const estimatedDuration = baseDuration * 3.5;
     
     // Update the end time (keep extending it as more text arrives)
     this.talkingEndTime = Math.max(this.talkingEndTime, getTime() + estimatedDuration);
     
-    print(`📊 Text: ${wordCount} words, base: ${baseDuration.toFixed(1)}s, with 20% buffer: ${estimatedDuration.toFixed(1)}s`);
+    print(`📊 Text: ${wordCount} words, base: ${baseDuration.toFixed(1)}s, extended: ${estimatedDuration.toFixed(1)}s`);
   }
 
   /**
@@ -766,7 +766,7 @@ When analyzing the camera feed, look for distinctive architectural features, scu
             role: "user",
             parts: [
               {
-                text: "Introduce yourself by saying: 'Hey I'm Freddy, your personal travel agent. Ask me to learn about the history, see it in 3D, or ask me questions!'"
+                text: "Introduce yourself by saying: 'Hey I'm Booster, your personal travel agent. Ask me anything about your surroundings, any monument's history, or to see them in 3D!'"
               }
             ]
           }

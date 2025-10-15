@@ -77,7 +77,7 @@
     - '// @ui {"widget":"separator"}'
     - '// @ui {"widget":"group_start", "label":"Animation"}'
     - // @input Component.AnimationPlayer animationPlayer
-    - "// @ui {\"widget\":\"label\", \"label\":\"AnimationPlayer for controlling Freddy's animations\"}"
+    - "// @ui {\"widget\":\"label\", \"label\":\"AnimationPlayer for controlling Booster's animations\"}"
     - '// @input string idleAnimationName = "idle"'
     - '// @ui {"widget":"label", "label":"Name of the idle animation clip"}'
     - '// @input string listeningAnimationName = "listening"'

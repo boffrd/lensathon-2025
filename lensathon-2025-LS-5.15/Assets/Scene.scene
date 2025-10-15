@@ -2145,7 +2145,7 @@
       positionOffset: !<Vec3> {x: 0.000000, y: -8.000000, z: -100.000000}
       returnToViewSpeed: 0.200000
       enableHoverAnimation: true
-      hoverVerticalDistance: !<float> 30.000000
+      hoverVerticalDistance: !<float> 20.000000
       hoverHorizontalDistance: !<float> 30.000000
       hoverAnimationDuration: !<float> 7.000000
       verticalSpeedMultiplier: !<float> 1.000000
@@ -5646,7 +5646,7 @@
       haveVideoInput: true
       haveAudioOutput: true
       voice: Fenrir
-      audioThreshold: 0.010000
+      audioThreshold: 0.013000
       silenceTimeout: !<float> 2.000000
   ScriptTypes:
     "":
