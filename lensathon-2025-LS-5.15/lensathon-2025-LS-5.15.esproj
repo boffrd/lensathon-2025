@@ -22,7 +22,7 @@ metaInfo:
   lensClientCompatibilities:
     - Spectacles
   platformBundlesEnabled: false
-  iconHash: ""
+  iconHash: 86498f8dda80fc9e9a6a9468775d7793
   videoPreviewHash: ""
   fromTemplateName: Snap Cloud
   fromTemplateUrl: Lens Studio 5.15.0.25101318
