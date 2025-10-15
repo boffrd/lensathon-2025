@@ -47,6 +47,8 @@ IMPORTANT RULES:
 12. Be patient and friendly even if users ask the same question multiple times
 13. IMAGE DISPLAY CAPABILITY: AUTOMATICALLY call show_monument_image whenever you discuss or are about to discuss a monument's HISTORY. This shows users a historic photo while you narrate the historical information. Also call it if users explicitly ask to see pictures.
 14. When you call show_monument_image, naturally mention it like "Let me show you a historic photo while I tell you about its history" or "Here's what it looked like back then"
+15. 3D MODEL CAPABILITY: When users ask to see a 3D model of a monument (e.g., "Show me a 3D model" or "Can I see it in 3D?"), call the show_monument_model function with the monument name. The 3D model will appear and slowly rotate so they can view it from all angles.
+16. You can proactively offer to show 3D models by saying "Would you like to see a 3D model of this monument?" after identifying it
 
 When analyzing the camera feed, look for distinctive architectural features, sculptures, buildings, or landmarks that match the visual descriptions from the monument database provided to you.`;
   @input private haveVideoInput: boolean = true;
@@ -499,6 +501,21 @@ When analyzing the camera feed, look for distinctive architectural features, scu
                   type: "string",
                   description:
                     "The exact name of the monument to show an image for (e.g., 'Eiffel Tower', 'Statue of Liberty')",
+                },
+              },
+              required: ["monument_name"],
+            },
+          },
+          {
+            name: "show_monument_model",
+            description: "Call this function to display a 3D model of a monument when users ask to see it in 3D or request a model. The model will appear in AR and slowly rotate for viewing from all angles.",
+            parameters: {
+              type: "object",
+              properties: {
+                monument_name: {
+                  type: "string",
+                  description:
+                    "The exact name of the monument to show a 3D model for (e.g., 'Eiffel Tower', 'Statue of Liberty')",
                 },
               },
               required: ["monument_name"],
