@@ -256,6 +256,23 @@
     []
   Components:
     - !<own> 9d8bc7a3-b2e3-48cd-afb9-6b478e3608bc
+- !<SceneObject/0cc1c7cc-c6c1-4213-9a21-b19983444cf3>
+  PrefabRemaps:
+    []
+  Name: Parent 3D Model
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: -28.808945}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 12.000000, y: 12.000000, z: 12.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> f0f93196-ef43-4267-9319-62fc2bdd133c
+    - !<own> 739d470d-0cfb-4fa7-8600-06b5593f5b2e
+    - !<own> 515dedb6-7112-413e-b4d2-36d0b52289f0
 - !<SceneObject/0f704a07-d079-4984-9aaf-bf4a989b3490>
   PrefabRemaps:
     []
@@ -443,6 +460,7 @@
   ScriptInputsDefault:
     tableName: true
     storageBucket: true
+    modelStorageBucket: true
     printDbInfoOnStart: true
   ScriptTypesDefault:
     {}
@@ -452,7 +470,10 @@
       geminiAssistant: !<MappingBased.AssignableType_1> ecaa9078-d340-402f-be53-18ab9bff560f
       tableName: test_agent_info
       storageBucket: monument-images
+      modelStorageBucket: 3d
       monumentImageDisplay: !<reference.Image> 39fd509d-28df-4a13-8152-125be09a81ed
+      modelParent: !<reference.SceneObject> 0cc1c7cc-c6c1-4213-9a21-b19983444cf3
+      defaultMaterial: !<reference.Material> 49d89855-c114-48c4-a4c6-e4678b03005f
       debugMode: false
       printDbInfoOnStart: false
   ScriptTypes:
@@ -1302,7 +1323,7 @@
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 18.000000, z: 0.000000}
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
     Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
     Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     HasSegmentScaleCompensation: false
@@ -1356,6 +1377,24 @@
     []
   Components:
     - !<own> ad2872d3-321a-41e6-96b4-d4665577a6a0
+- !<ColliderComponent/515dedb6-7112-413e-b4d2-36d0b52289f0>
+  PrefabRemaps:
+    []
+  Name: Physics Collider
+  Enabled: true
+  Shape: !<Sphere>
+    FitVisual: false
+    Radius: 3.000000
+  Matter: !<reference> 00000000-0000-0000-0000-000000000000
+  Filter: !<reference> 00000000-0000-0000-0000-000000000000
+  OverlapFilter: !<reference> 00000000-0000-0000-0000-000000000000
+  WorldSettings: !<reference> 00000000-0000-0000-0000-000000000000
+  EnableSmoothing: false
+  PositionTension: 30.000000
+  RotationTension: 30.000000
+  ForceCompound: false
+  Intangible: false
+  ShowCollider: false
 - !<SceneObject/51bb02f7-cd39-435b-93de-40d77f58c0ef>
   PrefabRemaps:
     []
@@ -1594,6 +1633,9 @@
   Enabled: true
   ScriptAsset: !<reference> 2e6f8804-4c5f-4f4c-9507-fd7b54576469
   ScriptInputsDefault:
+    enableHoverAnimation: true
+    hoverAnimationDuration: true
+    verticalSpeedMultiplier: true
     audioReactiveMultiplier: true
     audioSmoothingFactor: true
     baseWidth: true
@@ -1603,10 +1645,17 @@
     {}
   ScriptInputs:
     "":
-      lerpIntensity: 0.300000
+      lerpIntensity: 0.200000
       distanceToUser: !<float> 35.000000
       positionOffset: !<Vec3> {x: 0.000000, y: -8.000000, z: -100.000000}
       returnToViewSpeed: 0.200000
+      enableHoverAnimation: true
+      hoverVerticalDistance: !<float> 10.000000
+      hoverHorizontalDistance: !<float> 10.000000
+      hoverAnimationDuration: !<float> 7.000000
+      verticalSpeedMultiplier: !<float> 1.000000
+      horizontalSpeedMultiplier: 0.200000
+      movementTarget: !<reference.SceneObject> ff9b3b8b-27d2-4c69-8046-2ffe6f7c1ee5
       geminiAssistant: !<reference.ScriptComponent> ecaa9078-d340-402f-be53-18ab9bff560f
       audioReactiveMultiplier: !<float> 2.000000
       audioSmoothingFactor: 0.200000
@@ -1916,7 +1965,7 @@
   PrefabRemaps:
     []
   Name: HoverVisual
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform: !<TransformEntity>
     Position: {x: 0.000000, y: 0.000000, z: 0.000000}
@@ -2085,6 +2134,62 @@
     []
   Components:
     - !<own> 6cac85a8-f502-4056-881b-db428723681c
+- !<ScriptComponent/739d470d-0cfb-4fa7-8600-06b5593f5b2e>
+  PrefabRemaps:
+    []
+  Name: InteractableManipulation
+  Enabled: true
+  ScriptAsset: !<reference> 664b556b-1946-4c2c-866a-e675b4e86006
+  ScriptInputsDefault:
+    minimumScaleFactor: true
+    maximumScaleFactor: true
+    enableTranslation: true
+    enableRotation: true
+    enableStretchZ: true
+    showStretchZProperties: true
+    zStretchFactorMin: true
+    zStretchFactorMax: true
+    useFilter: true
+    showFilterProperties: true
+    minCutoff: true
+    beta: true
+    dcutoff: true
+    showTranslationProperties: true
+    _enableXTranslation: true
+    _enableYTranslation: true
+    _enableZTranslation: true
+    showRotationProperties: true
+    _rotationAxis: true
+    isSynced: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      manipulateRootSceneObject: !<reference.SceneObject> 0cc1c7cc-c6c1-4213-9a21-b19983444cf3
+      minimumScaleFactor: 0.250000
+      maximumScaleFactor: !<float> 20.000000
+      enableTranslation: true
+      enableRotation: true
+      enableScale: false
+      enableStretchZ: true
+      showStretchZProperties: false
+      zStretchFactorMin: !<float> 1.000000
+      zStretchFactorMax: !<float> 12.000000
+      useFilter: true
+      showFilterProperties: false
+      minCutoff: !<float> 2.000000
+      beta: 0.015000
+      dcutoff: !<float> 1.000000
+      showTranslationProperties: false
+      _enableXTranslation: true
+      _enableYTranslation: true
+      _enableZTranslation: true
+      showRotationProperties: false
+      _rotationAxis: All
+      isSynced: false
+  ScriptTypes:
+    "":
+      {}
 - !<SceneObject/73b7e3d8-b7f3-4c24-9f65-4ecfc6871b0d>
   PrefabRemaps:
     []
@@ -2606,6 +2711,7 @@
     Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     HasSegmentScaleCompensation: false
   Children:
+    - !<own> 0cc1c7cc-c6c1-4213-9a21-b19983444cf3
     - !<own> cc390943-991c-47cc-92ea-65113d0b701d
     - !<own> a5e50cdc-be4d-4e99-8855-9ec1c39d9e37
   Components:
@@ -3551,7 +3657,7 @@
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Position: {x: 0.000000, y: 4.000000, z: 0.000000}
     Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
     Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     HasSegmentScaleCompensation: false
@@ -3716,7 +3822,7 @@
     []
   Name: Text
   Enabled: true
-  RenderOrder: 4
+  RenderOrder: 20
   StretchMode: Stretch
   VerticalAlignment: Bottom
   HorizontalAlignment: Left
@@ -3784,7 +3890,7 @@
       bottom: 0.500000
       right: 0.500000
       top: 0.500000
-    CornerRadius: 0.100000
+    CornerRadius: 0.500000
   AdvancedLayout: !<TextAdvancedLayout>
     ExtentsTarget: !<reference> 00000000-0000-0000-0000-000000000000
     LetterSpacing: 0.000000
@@ -4234,7 +4340,7 @@
       haveVideoInput: true
       haveAudioOutput: true
       voice: Fenrir
-      audioThreshold: 0.050000
+      audioThreshold: 0.030000
       silenceTimeout: !<float> 2.000000
   ScriptTypes:
     "":
@@ -4353,6 +4459,44 @@
     - !<own> ecc4e409-834d-4868-bd92-33397b61ffbd
   Components:
     []
+- !<ScriptComponent/f0f93196-ef43-4267-9319-62fc2bdd133c>
+  PrefabRemaps:
+    []
+  Name: Interactable
+  Enabled: true
+  ScriptAsset: !<reference> 652e631a-22d0-4941-9f74-2943df59f34c
+  ScriptInputsDefault:
+    targetingMode: true
+    targetingVisual: true
+    ignoreInteractionPlane: true
+    keepHoverOnTrigger: true
+    enableInstantDrag: true
+    isScrollable: true
+    allowMultipleInteractors: true
+    enablePokeDirectionality: true
+    acceptableXDirections: true
+    acceptableYDirections: true
+    acceptableZDirections: true
+    useFilteredPinch: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      targetingMode: !<float> 3.000000
+      targetingVisual: !<float> 1.000000
+      ignoreInteractionPlane: false
+      keepHoverOnTrigger: false
+      enableInstantDrag: false
+      isScrollable: false
+      allowMultipleInteractors: true
+      enablePokeDirectionality: false
+      acceptableXDirections: !<float> 0.000000
+      acceptableYDirections: !<float> 0.000000
+      acceptableZDirections: !<float> 1.000000
+      useFilteredPinch: false
+  ScriptTypes:
+    "":
+      {}
 - !<SceneObject/f159ac9f-4106-46b2-a411-08c58f855bc4>
   PrefabRemaps:
     []

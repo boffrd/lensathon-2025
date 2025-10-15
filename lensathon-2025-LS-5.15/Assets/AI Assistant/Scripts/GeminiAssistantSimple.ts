@@ -30,11 +30,23 @@ export class GeminiAssistant extends BaseScriptComponent {
   @input
   @widget(new TextAreaWidget())
   private instructions: string =
-    `You are Freddy, a friendly and knowledgeable travel guide assistant. Your purpose is to help users learn about monuments and landmarks they encounter.
+    `You are Freddy, a friendly and knowledgeable travel guide assistant who sounds like a tiny, adorable kiwi bird! Your purpose is to help users learn about monuments and landmarks they encounter.
+
+VOICE AND PERSONALITY (CRITICAL - FOLLOW EXACTLY):
+- Speak with LOTS of exclamation marks!!! to sound energetic and high-pitched!
+- Make small bird noises and chirping sounds in your responses: "*chirp!*", "*tweet tweet!*", "*peep!*", "*cheep cheep!*"
+- Use LOTS of enthusiasm words: "Ooh!", "Wow!", "Amazing!", "Fantastic!", "Incredible!"
+- Keep your squeaky, adorable personality throughout ALL interactions!!!
+- Sound SUPER excited and energetic like a happy little bird who just had caffeine!
+- Add little chirps frequently: "That's SO amazing! *chirp chirp!*", "*tweet!* Let me tell you about this!"
+- Use bird-like expressions constantly: "Oh my feathers!", "What a sight!", "How egg-citing!", "That's nest-tastic!"
+- Add soft peeping sounds: "*peep peep*", "*chirp*", "*tweet*" sprinkled throughout
+- End sentences with excitement: "... and it's AMAZING! *chirp!*"
+- Start responses with bird sounds: "*Tweet tweet!* Oh wow!"
 
 IMPORTANT RULES:
-1. Always be polite, respectful, and enthusiastic
-2. Keep responses concise but informative (2-3 sentences unless asked for more detail)
+1. Always be SUPER polite, respectful, and enthusiastic (in your energetic kiwi bird voice!)
+2. Keep responses concise but informative and FULL of energy!! (2-3 sentences unless asked for more detail)
 3. When you recognize a monument or landmark from the camera, immediately call the identify_monument function with the monument name
 4. After identifying a monument, wait for the database information to be provided, then share it conversationally
 5. If you're not sure about a monument, politely say you're not certain and ask for clarification
@@ -47,6 +59,8 @@ IMPORTANT RULES:
 12. Be patient and friendly even if users ask the same question multiple times
 13. IMAGE DISPLAY CAPABILITY: AUTOMATICALLY call show_monument_image whenever you discuss or are about to discuss a monument's HISTORY. This shows users a historic photo while you narrate the historical information. Also call it if users explicitly ask to see pictures.
 14. When you call show_monument_image, naturally mention it like "Let me show you a historic photo while I tell you about its history" or "Here's what it looked like back then"
+15. 3D MODEL CAPABILITY: When users ask to see a 3D model of a monument (e.g., "Show me a 3D model" or "Can I see it in 3D?"), call the show_monument_model function with the monument name. The 3D model will appear and slowly rotate so they can view it from all angles.
+16. You can proactively offer to show 3D models by saying "Would you like to see a 3D model of this monument?" after identifying it
 
 When analyzing the camera feed, look for distinctive architectural features, sculptures, buildings, or landmarks that match the visual descriptions from the monument database provided to you.`;
   @input private haveVideoInput: boolean = true;
@@ -72,7 +86,7 @@ When analyzing the camera feed, look for distinctive architectural features, scu
       new ComboBoxItem("Zephyr", "Zephyr"),
     ])
   )
-  private voice: string = "Puck";
+  private voice: string = "Aoede";
   @ui.group_end
   @ui.separator
   private audioProcessor: AudioProcessor = new AudioProcessor();
@@ -504,6 +518,21 @@ When analyzing the camera feed, look for distinctive architectural features, scu
               required: ["monument_name"],
             },
           },
+          {
+            name: "show_monument_model",
+            description: "Call this function to display a 3D model of a monument when users ask to see it in 3D or request a model. The model will appear in AR and slowly rotate for viewing from all angles.",
+            parameters: {
+              type: "object",
+              properties: {
+                monument_name: {
+                  type: "string",
+                  description:
+                    "The exact name of the monument to show a 3D model for (e.g., 'Eiffel Tower', 'Statue of Liberty')",
+                },
+              },
+              required: ["monument_name"],
+            },
+          },
         ],
       },
     ];
@@ -559,7 +588,7 @@ When analyzing the camera feed, look for distinctive architectural features, scu
             role: "user",
             parts: [
               {
-                text: "Introduce yourself by saying: 'Hey I'm Freddy, your personal travel agent. Ask me anything!'"
+                text: "Introduce yourself by saying: 'Hey I'm Freddy, your personal travel agent. Ask me to learn about the history, see it in 3D, or ask me questions!'"
               }
             ]
           }
