@@ -1249,26 +1249,6 @@
   BlendNormals: false
   BlendShapes:
     {}
-- !<RenderMeshVisual/3b1943e8-9ebe-4153-ad6f-5bfbba1b8197>
-  PrefabRemaps:
-    []
-  Name: Render Mesh Visual
-  Enabled: true
-  RenderOrder: 5
-  StretchMode: Stretch
-  VerticalAlignment: Center
-  HorizontalAlignment: Center
-  MeshShadowMode: None
-  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
-  ShadowDensity: 1.000000
-  Materials:
-    - !<reference> b8c7dde2-51cd-4c7e-ae07-45f298b57157
-  Mesh: !<reference> 3404d318-7ac2-428b-a2a6-419538efe5cc
-  Skin: !<reference> 00000000-0000-0000-0000-000000000000
-  BlendShapesEnabled: true
-  BlendNormals: false
-  BlendShapes:
-    {}
 - !<ScriptComponent/3bbf27ea-a24a-4d9f-84a6-56b5830bb48e>
   PrefabRemaps:
     []
@@ -2457,21 +2437,6 @@
   ScriptTypes:
     "":
       {}
-- !<SceneObject/6500890d-6e8c-4e15-a45e-fe1ce165cf0d>
-  PrefabRemaps:
-    []
-  Name: HoverVisual
-  Enabled: false
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.050000, y: 1.050000, z: 1.050000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    - !<own> 3b1943e8-9ebe-4153-ad6f-5bfbba1b8197
 - !<SceneObject/6592fd98-8ae7-43b2-9e0d-b63edeaac767>
   PrefabRemaps:
     []
@@ -4777,7 +4742,6 @@
     HasSegmentScaleCompensation: false
   Children:
     - !<own> ff9b3b8b-27d2-4c69-8046-2ffe6f7c1ee5
-    - !<own> 6500890d-6e8c-4e15-a45e-fe1ce165cf0d
     - !<own> 4e19f392-98c0-4ab3-83c9-13d2d80dfc9f
     - !<own> aee5f036-e732-4aa4-a262-8f2f369b8367
     - !<own> bd8ebaf9-d621-48b4-9a8a-0ddd24e512bf
