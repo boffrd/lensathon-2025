@@ -1,6 +1,8 @@
 import { SnapCloudRequirements } from '../Examples/SnapCloudRequirements';
 import { createClient } from 'SupabaseClient.lspkg/supabase-snapcloud';
 import { GeminiAssistant } from '../AI Assistant/Scripts/GeminiAssistantSimple';
+import { LSTween } from "LSTween.lspkg/LSTween";
+import Easing from "LSTween.lspkg/TweenJS/Easing";
 
 /**
  * Handles fetching monument data from Supabase and sending it to the AI assistant
@@ -729,7 +731,8 @@ export class MonumentDataHandler extends BaseScriptComponent {
         
         // Set local position to zero
         transform.setLocalPosition(vec3.zero());
-        transform.setLocalScale(new vec3(1, 1, 1));
+        // Start at scale 0 for animation
+        transform.setLocalScale(vec3.zero());
         transform.setLocalRotation(quat.quatIdentity());
       }
       
@@ -738,7 +741,9 @@ export class MonumentDataHandler extends BaseScriptComponent {
       
       this.log("🎨 3D model loaded successfully");
       this.log(`Local Position: ${transform.getLocalPosition()}`);
-      this.log(`Local Scale: ${transform.getLocalScale()}`);
+      
+      // Scale in the model with animation
+      this.scaleModelIn();
       
       // Start rotation animation
       this.startModelRotation();
@@ -746,6 +751,58 @@ export class MonumentDataHandler extends BaseScriptComponent {
     } catch (error) {
       this.log(`❌ Error finalizing model: ${error}`);
     }
+  }
+  
+  /**
+   * Scale in the 3D model with smooth animation
+   */
+  private scaleModelIn(): void {
+    if (!this.currentModel) {
+      return;
+    }
+    
+    const transform = this.currentModel.getTransform();
+    const targetScale = new vec3(1, 1, 1);
+    
+    this.log("🎬 Scaling in 3D model...");
+    
+    LSTween.scaleFromToLocal(
+      transform,
+      vec3.zero(),
+      targetScale,
+      800 // 800ms duration
+    )
+      .easing(Easing.Cubic.Out)
+      .onComplete(() => {
+        this.log("✅ 3D model scale-in animation complete");
+      })
+      .start();
+  }
+  
+  /**
+   * Scale out the 3D model with smooth animation
+   */
+  private scaleModelOut(onComplete?: () => void): void {
+    if (!this.currentModel) {
+      if (onComplete) onComplete();
+      return;
+    }
+    
+    const transform = this.currentModel.getTransform();
+    
+    this.log("🎬 Scaling out 3D model...");
+    
+    LSTween.scaleToLocal(
+      transform,
+      vec3.zero(),
+      600 // 600ms duration
+    )
+      .easing(Easing.Cubic.In)
+      .onComplete(() => {
+        this.log("✅ 3D model scale-out animation complete");
+        if (onComplete) onComplete();
+      })
+      .start();
   }
 
   /**
@@ -776,21 +833,30 @@ export class MonumentDataHandler extends BaseScriptComponent {
   }
 
   /**
-   * Remove the current 3D model from scene
+   * Remove the current 3D model from scene with animation
    */
   private removeCurrentModel(): void {
     if (this.currentModel) {
-      // Stop rotation
-      if (this.rotateModelUpdateEvent) {
-        this.rotateModelUpdateEvent.enabled = false;
-        this.rotateModelUpdateEvent = null;
-      }
+      const modelToRemove = this.currentModel;
       
-      // Destroy model
-      this.currentModel.destroy();
+      // Scale out with animation, then destroy
+      this.scaleModelOut(() => {
+        // Stop rotation
+        if (this.rotateModelUpdateEvent) {
+          this.rotateModelUpdateEvent.enabled = false;
+          this.rotateModelUpdateEvent = null;
+        }
+        
+        // Destroy model after animation completes
+        if (modelToRemove) {
+          modelToRemove.destroy();
+        }
+        
+        this.log("🗑️ 3D model removed");
+      });
+      
+      // Clear reference immediately so new model can load
       this.currentModel = null;
-      
-      this.log("🗑️ 3D model removed");
     }
   }
 
