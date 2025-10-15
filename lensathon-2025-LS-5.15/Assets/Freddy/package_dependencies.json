@@ -1,0 +1,11 @@
+{
+    "dependencies": [
+        {
+            "assetId": "HqxaXDqreBAIMw5zAP5qz",
+            "exportId": "dca844e2-a0bb-4939-adb2-9fd02c781259",
+            "id": "be47575e-c717-4dcb-8a3b-39ca212b1d23",
+            "name": "Tween Manager",
+            "version": "1.1.0"
+        }
+    ]
+}

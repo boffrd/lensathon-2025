@@ -1,0 +1,69 @@
+- !<AssetImportMetadata/8f47e014-02ee-6146-b860-11b17e3c60a8>
+  ImportedAssetIds:
+    JavaScriptAsset: !<reference> 4fb388be-3035-496f-81b2-3c9e5f935ab3
+  ImporterName: JavaScriptAssetImporter
+  PrimaryAsset: !<reference> 4fb388be-3035-496f-81b2-3c9e5f935ab3
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    JavaScriptAsset: !<own> cc33db7e-232f-4def-916b-b221fb6863d1
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<ScriptAssetData/cc33db7e-232f-4def-916b-b221fb6863d1>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 32617181-8297-4361-affb-6213a201e9e9
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    addRotation: false
+    anchorCount: false
+    collider: false
+    colliderForce: false
+    force: false
+    isRelative: false
+    iterations: false
+    joints: false
+    relativeTo: false
+    sizeMutiplier: false
+    stiffness: false
+    timeSpeed: false
+    type: false
+    useCollider: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - joints: !<reference.SceneObject[]>
+        []
+      anchorCount: 1
+      stiffness: !<float> 1.000000
+      type: 0
+      iterations: 1
+      timeSpeed: !<float> 1.000000
+      force: !<Vec3> {x: 0.000000, y: -1.000000, z: 0.000000}
+      isRelative: false
+      relativeTo: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      addRotation: false
+      useCollider: false
+      collider: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      colliderForce: !<float> 0.000000
+      sizeMutiplier: !<float> 6.000000
+  ScriptTypes:
+    -
+      {}

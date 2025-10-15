@@ -1,0 +1,106 @@
+- !<ObjectPrefab/1db160cc-79c9-497e-a6af-4a6ff2dfd82b>
+  PackagePath: ""
+  objects:
+    - !<own> 3dead158-03fa-4948-b139-302097eda3e6
+  LazyLoading: false
+  RetainAssets: true
+- !<ScriptComponent/0105ae41-587e-407a-beaf-9e6fa133b202>
+  PrefabRemaps:
+    []
+  Name: Example_YoyoTween
+  Enabled: false
+  ScriptAsset: !<reference> 82828d33-42bb-43b6-b8c5-0e5866f60f37
+  ScriptInputsDefault:
+    {}
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      {}
+  ScriptTypes:
+    "":
+      {}
+- !<RenderMeshVisual/186b40c7-73e1-4558-8a52-24b8ac5445cf>
+  PrefabRemaps:
+    []
+  Name: Render Mesh Visual
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 0dd970bd-5f9c-4a3f-9268-cc148a769693
+  Mesh: !<reference> cd71eff3-85a5-4a32-b038-ccbf5fef298c
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/3dead158-03fa-4948-b139-302097eda3e6>
+  PrefabRemaps:
+    - 0105ae41-587e-407a-beaf-9e6fa133b202: 0105ae41-587e-407a-4150-61905ecc4dfd
+    - 186b40c7-73e1-4558-8a52-24b8ac5445cf: 186b40c7-73e1-4558-75ad-db4753abba30
+    - 3dead158-03fa-4948-b139-302097eda3e6: 3dead158-03fa-4948-4ec6-cfdf68125c19
+    - 46871ef0-2496-4c0c-9d3b-cc57d094cf45: 46871ef0-2496-4c0c-62c4-33a82f6b30ba
+    - de970451-15e9-4519-925b-eb380cf10b97: de970451-15e9-4519-6da4-14c7f30ef468
+    - f648bc30-3676-4d55-899e-06813e6ae0cd: f648bc30-3676-4d55-7661-f97ec1951f32
+  Name: Jetpack VFX
+  Enabled: false
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: -24.119787}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> de970451-15e9-4519-925b-eb380cf10b97
+    - !<own> f648bc30-3676-4d55-899e-06813e6ae0cd
+  Components:
+    - !<own> 0105ae41-587e-407a-beaf-9e6fa133b202
+- !<VFXComponent/46871ef0-2496-4c0c-9d3b-cc57d094cf45>
+  PrefabRemaps:
+    []
+  Name: VFX Component
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  VFXAsset: !<reference> c65fc437-ffcf-4efb-8f47-dd31cc877dae
+- !<SceneObject/de970451-15e9-4519-925b-eb380cf10b97>
+  PrefabRemaps:
+    []
+  Name: Flame Cone
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: -0.000000, z: 180.000000}
+    Scale: {x: 5.000000, y: 10.000000, z: 5.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 186b40c7-73e1-4558-8a52-24b8ac5445cf
+- !<SceneObject/f648bc30-3676-4d55-899e-06813e6ae0cd>
+  PrefabRemaps:
+    []
+  Name: Smoke Emitter
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 1.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 46871ef0-2496-4c0c-9d3b-cc57d094cf45

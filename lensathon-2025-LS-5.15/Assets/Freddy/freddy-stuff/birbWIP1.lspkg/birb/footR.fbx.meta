@@ -1,0 +1,109 @@
+- !<AssetImportMetadata/a6d61c23-d690-fb46-44b7-b88f0e011e9b>
+  ImportedAssetIds:
+    .hidden/mat-bird: !<reference> e4e2b927-26d4-41ac-8201-abc3516e104f
+    .hidden/white: !<reference> fca4bf02-0634-4a59-9db7-6ff16d6ff7d8
+    66780cf3a4dcb2b8: !<reference> 7a557045-9ed7-406c-adcb-8cdbbac4e824
+    6d85813b17855001: !<reference> e7cfe33a-0e0a-43a6-a27c-52095831ad3c
+    Materials/mat-bird: !<reference> af5535e0-131e-4228-b1d1-6fe8f77b6954
+    Materials/mat-bird|mat-bird|GraphPassInfo: !<reference> 9331d658-ccc7-44e1-a06c-6e4fc7a158a2
+    Meshes/leggyR: !<reference> c951f5c6-66c2-43e9-b9af-b35cc0bdc6f9
+    Scene: !<reference> e6d7961a-12c8-46b4-b2b1-25788ef21e44
+    Textures/birb-tex: !<reference> 6ed9ce34-e7dd-4eb3-a5a5-9d9d1c2cc7a7
+    ec38a719c86662c2: !<reference> df27b0bb-6a90-4716-8234-83659d7bcb2c
+  ImporterName: FbxImporter
+  PrimaryAsset: !<reference> e6d7961a-12c8-46b4-b2b1-25788ef21e44
+  PackageType: LegacyPackage
+  LegacyPackagePolicy: CanBeUnpackedTransparent
+  ExtraData:
+    {}
+  AssetDataMap:
+    Scene: !<own> f09ef5a9-36a1-40a5-9e9c-b9a6b7f42b73
+  DependentFiles:
+    - birb-tex.png
+  ImporterSettings: !<FbxImporterSettings>
+    UseLegacyImporter: false
+    WithMaterials: true
+    NamingConvention: ByCategorySanitizeV2
+    PersistentIdGenerationAlgorithm: DescriptorBased
+    AnimationCurveOptimization: true
+    CustomAnimationSamplingRate: 30.000000
+    ImportVertexColor: true
+    ImportTangentsAndBinormals: true
+    RegenerateTangentsAndBinormals: false
+    RegenerateNormalsForSkinnedMeshes: true
+    ImportBlendShapeAnimation: true
+    ImportVertexAnimation: true
+    GeneratePivots: true
+    TriangulateNURBS: true
+    UseLegacyFbxLoader: false
+  CompressionSettings: !<ComplexCompressionSettings>
+    Presets:
+      None Compression: !<SingleCompressionSettings>
+        CompressorName: None
+        CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+      Performance Compression: !<SingleCompressionSettings>
+        CompressorName: Performance
+        CompressionSettings: !<TextureCompressionMipmapSettings>
+          Level: Medium
+          Mipmap: false
+    ExtensionMappings:
+      mesh: None Compression
+      png: Performance Compression
+      jpg: Performance Compression
+    Overrides:
+      {}
+- !<SceneObject/7a557045-9ed7-406c-5234-7324453b17db>
+  PrefabRemaps:
+    []
+  Name: footR
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> e7cfe33a-0e0a-43a6-5d83-adf6a7ce52c3
+  Components:
+    []
+- !<RenderMeshVisual/df27b0bb-6a90-4716-7dcb-7c9a628434d3>
+  PrefabRemaps:
+    []
+  Name: component_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> af5535e0-131e-4228-b1d1-6fe8f77b6954
+  Mesh: !<reference> c951f5c6-66c2-43e9-b9af-b35cc0bdc6f9
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/e7cfe33a-0e0a-43a6-5d83-adf6a7ce52c3>
+  PrefabRemaps:
+    []
+  Name: leggyR
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: -90.000000, y: -0.000000, z: 0.000000}
+    Scale: {x: 100.000000, y: 100.000000, z: 100.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> df27b0bb-6a90-4716-7dcb-7c9a628434d3
+- !<ObjectPrefabAssetData/f09ef5a9-36a1-40a5-9e9c-b9a6b7f42b73>
+  Prototype: !<ObjectOwner/9db2052e-9970-4488-9dcd-5cab2283a060>
+    PackagePath: ""
+    objects:
+      - !<own> 7a557045-9ed7-406c-5234-7324453b17db

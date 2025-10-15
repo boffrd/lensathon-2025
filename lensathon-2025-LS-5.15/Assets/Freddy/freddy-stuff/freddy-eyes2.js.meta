@@ -1,0 +1,46 @@
+- !<AssetImportMetadata/f68bdae2-4db8-5b36-a756-2ecee298e672>
+  ImportedAssetIds:
+    JavaScriptAsset: !<reference> c0683b00-ada1-4869-905f-f85e6edf568e
+  ImporterName: JavaScriptAssetImporter
+  PrimaryAsset: !<reference> c0683b00-ada1-4869-905f-f85e6edf568e
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    JavaScriptAsset: !<own> b274b26f-9e7a-46f3-86c1-567837deb2a7
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<ScriptAssetData/b274b26f-9e7a-46f3-86c1-567837deb2a7>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 9f665c1d-b051-41d0-9a45-15ffde75dc97
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    additionalEulerRotation: false
+    camera: false
+    targetObject: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - targetObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      camera: !<reference.Camera> 00000000-0000-0000-0000-000000000000
+      additionalEulerRotation: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
+  ScriptTypes:
+    -
+      {}

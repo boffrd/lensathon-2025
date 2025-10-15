@@ -1,0 +1,1514 @@
+- !<AssetImportMetadata/fc8a5932-a5f4-33d4-a20f-46c862095277>
+  ImportedAssetIds:
+    ObjectPrefab: !<reference> 2875da46-5fb3-4893-85bc-48282774eb4f
+  ImporterName: ObjectPrefabImporter
+  PrimaryAsset: !<reference> 2875da46-5fb3-4893-85bc-48282774eb4f
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    ObjectPrefab: !<own> 84975ed1-9ce4-4295-8326-b4cc566d0242
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<ScriptComponent/118415a1-1ed7-4b61-530c-5840ffdc18f9>
+  PrefabRemaps:
+    []
+  Name: InteractableManipulation
+  Enabled: true
+  ScriptAsset: !<reference> 4a18b21d-86f7-4c86-8778-a149c2ab1d07
+  ScriptInputsDefault:
+    minimumScaleFactor: true
+    maximumScaleFactor: true
+    enableTranslation: true
+    enableRotation: true
+    enableScale: true
+    enableStretchZ: true
+    showStretchZProperties: true
+    zStretchFactorMin: true
+    zStretchFactorMax: true
+    useFilter: true
+    showFilterProperties: true
+    minCutoff: true
+    beta: true
+    dcutoff: true
+    showTranslationProperties: true
+    _enableXTranslation: true
+    _enableYTranslation: true
+    _enableZTranslation: true
+    showRotationProperties: true
+    _rotationAxis: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      manipulateRootSceneObject: !<reference.SceneObject> 6e23adf1-5116-4337-539e-c5aa93dc4c9c
+      minimumScaleFactor: 0.250000
+      maximumScaleFactor: !<float> 20.000000
+      enableTranslation: true
+      enableRotation: true
+      enableScale: true
+      enableStretchZ: true
+      showStretchZProperties: false
+      zStretchFactorMin: !<float> 1.000000
+      zStretchFactorMax: !<float> 12.000000
+      useFilter: true
+      showFilterProperties: false
+      minCutoff: !<float> 2.000000
+      beta: 0.015000
+      dcutoff: !<float> 1.000000
+      showTranslationProperties: false
+      _enableXTranslation: true
+      _enableYTranslation: true
+      _enableZTranslation: true
+      showRotationProperties: false
+      _rotationAxis: All
+      isSynced: true
+  ScriptTypes:
+    "":
+      {}
+- !<SceneObject/1a9e4bff-d189-460a-6466-01f4c1b424d8>
+  PrefabRemaps:
+    []
+  Name: beak-bottom
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 1.263303, z: 0.000000}
+    Rotation: {x: 2.390634, y: -0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 85ce2bcc-75be-479d-45b0-58208003a31e
+  Components:
+    []
+- !<SceneObject/1c2c0c0d-c9d6-4296-4c2a-216c99c08bc3>
+  PrefabRemaps:
+    []
+  Name: GPU Particles Trails 2
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -0.064890, y: 1.190026, z: 0.027425}
+    Rotation: {x: 178.878387, y: 2.522971, z: 156.029831}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 38d1969a-3bc7-4f4c-73f0-7107e8209eef
+- !<SceneObject/1c2d6ca4-9210-45f9-6e1f-dcfe8531fb63>
+  PrefabRemaps:
+    []
+  Name: eyeL-connector
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 1.217324, z: 0.000000}
+    Rotation: {x: 0.027701, y: 0.000113, z: -90.364548}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 728bb39e-4fef-41f6-7e6d-25eef77a095d
+  Components:
+    []
+- !<SceneObject/1da41738-0358-4cf2-6b45-9c63419485b6>
+  PrefabRemaps:
+    []
+  Name: tail1
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 1.000000, z: 0.000000}
+    Rotation: {x: -91.380341, y: 0.000000, z: -0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 57293b59-324e-4abf-75a2-dbf7a783268c
+    - !<own> 3c5e52e5-3347-4720-6f1c-4fae145ea8b9
+    - !<own> 8eb3890f-0f36-41f3-746b-cc87a2c666d5
+  Components:
+    []
+- !<SceneObject/1dbd31f6-c0f0-43c5-7153-2993bfabef70>
+  PrefabRemaps:
+    []
+  Name: leggyL
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000061}
+    Rotation: {x: -90.000000, y: -0.000000, z: 0.000000}
+    Scale: {x: 100.000000, y: 100.000000, z: 100.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 81a201fd-2a9b-44c2-70a0-9eb92e88c698
+  Components:
+    - !<own> dfd2b666-4043-4ab9-68ab-e0305d1c73b8
+- !<SceneObject/1f64953c-b2b9-4e28-46be-40c69fe76c8e>
+  PrefabRemaps:
+    []
+  Name: look-at-manager 1
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: -29.652878}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 83518e50-516c-496a-594f-5d33324a753a
+    - !<own> 4da7e41c-9fb0-4d92-78ae-dd737eb053f3
+    - !<own> d4f4b612-790a-4a7b-7008-d473e3fa48ed
+    - !<own> 3ea42c2e-5029-43eb-69fb-590490738904
+    - !<own> 33a7670b-65e3-4169-7556-5a6cd6394489
+- !<SceneObject/222e959b-67d1-4b84-66b7-cf5af5530c50>
+  PrefabRemaps:
+    []
+  Name: tail3_end
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 1.119542, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<SceneObject/2e143daf-37a6-4276-5e1b-0d63bb4ef51b>
+  PrefabRemaps:
+    []
+  Name: leggyR
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: -90.000000, y: -0.000000, z: 0.000000}
+    Scale: {x: 100.000000, y: 100.000000, z: 100.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 41ceeaae-bcde-4e09-786d-4aa626c27081
+  Components:
+    - !<own> 6262b9bb-9545-47e2-4623-9557b2180f0f
+- !<SceneObject/32b0c326-b96c-4fd0-77c6-2fae48817078>
+  PrefabRemaps:
+    []
+  Name: eyeL_end
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.669972, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<SceneObject/3392e0c8-42c9-4cfc-6b95-bfe91d5b155b>
+  PrefabRemaps:
+    []
+  Name: rocketL_end
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 2.472076, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<ScriptComponent/33a7670b-65e3-4169-7556-5a6cd6394489>
+  PrefabRemaps:
+    []
+  Name: LensController 4
+  Enabled: false
+  ScriptAsset: !<reference> 76eaad6c-a069-459e-983a-476d2876e8a8
+  ScriptInputsDefault:
+    additionalEulerRotation: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      targetObject: !<reference.SceneObject> 729095dd-fe11-49ba-8275-fb749fb7a46f
+      camera: !<reference.Camera> 00000000-0000-0065-0000-000000000065
+      lookAtBlend: 0.650000
+      additionalEulerRotation: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
+  ScriptTypes:
+    "":
+      {}
+- !<RenderMeshVisual/38d1969a-3bc7-4f4c-73f0-7107e8209eef>
+  PrefabRemaps:
+    []
+  Name: Render Mesh Visual
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> d51a8a2b-eb14-41c1-a685-135f92db44b4
+  Mesh: !<reference> 62c87a3e-9f88-4ec7-a846-fcce9f4589e7
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/3c5e52e5-3347-4720-6f1c-4fae145ea8b9>
+  PrefabRemaps:
+    []
+  Name: rocketconnector1L
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 1.414010, z: 0.000000}
+    Rotation: {x: 40.122356, y: 0.324914, z: -90.889748}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 51c4e3c6-b2c9-4125-7b8a-04a938145db4
+  Components:
+    []
+- !<ScriptComponent/3ea42c2e-5029-43eb-69fb-590490738904>
+  PrefabRemaps:
+    []
+  Name: freddy-headturnX
+  Enabled: false
+  ScriptAsset: !<reference> 4f0c0deb-ee53-4d74-ab5b-837b262df91a
+  ScriptInputsDefault:
+    {}
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      targetObject: !<reference.SceneObject> 729095dd-fe11-49ba-8275-fb749fb7a46f
+      camera: !<reference.Camera> 00000000-0000-0065-0000-000000000065
+      lookAtBlend: !<float> 1.000000
+      additionalEulerRotation: !<Vec3> {x: 45.000000, y: 0.000000, z: 0.000000}
+  ScriptTypes:
+    "":
+      {}
+- !<SceneObject/41ceeaae-bcde-4e09-786d-4aa626c27081>
+  PrefabRemaps:
+    []
+  Name: legR-end
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -0.700532, y: 0.000001, z: -5.913169}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<SceneObject/45a999f3-552f-4fb7-5b30-4baaf4cc864b>
+  PrefabRemaps:
+    []
+  Name: beak-top
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 1.263303, z: 0.000000}
+    Rotation: {x: 2.112473, y: -0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> c93b50c7-b44b-4667-7418-d9e18d5496f6
+  Components:
+    []
+- !<RenderMeshVisual/49c51d92-5e0c-4ceb-5d42-612595477d96>
+  PrefabRemaps:
+    []
+  Name: Render Mesh Visual
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> d51a8a2b-eb14-41c1-a685-135f92db44b4
+  Mesh: !<reference> 62c87a3e-9f88-4ec7-a846-fcce9f4589e7
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<AnimationPlayer/4a66f96e-0819-4e69-5c03-32b49cc0c8ea>
+  PrefabRemaps:
+    []
+  Name: component_11
+  Enabled: false
+  Autoplay: true
+  ClipRangeType: Frames
+  AnimationClips:
+    - !<AnimationClip>
+      AnimationAsset: !<reference> e34c7411-47f3-42ee-8dce-15deda260709
+      Name: Armature|talk
+      Weight: 1.000000
+      PlaybackSpeed: 1.000000
+      Begin: 0.000000
+      End: 73.749992
+      Offset: 0.000000
+      Reversed: false
+      Disabled: false
+      BlendMode: Default
+      ScaleMode: Multiply
+      PlaybackMode: Loop
+    - !<AnimationClip>
+      AnimationAsset: !<reference> cb7ef455-9db2-4bd4-b5bb-279e87bc5470
+      Name: Armature|listening
+      Weight: 1.000000
+      PlaybackSpeed: 1.000000
+      Begin: 0.000000
+      End: 73.749992
+      Offset: 0.000000
+      Reversed: false
+      Disabled: false
+      BlendMode: Default
+      ScaleMode: Multiply
+      PlaybackMode: Loop
+    - !<AnimationClip>
+      AnimationAsset: !<reference> 4e917640-c062-4d1d-a8cc-6fa9e47b1385
+      Name: Armature|idle
+      Weight: 1.000000
+      PlaybackSpeed: 1.000000
+      Begin: 0.000000
+      End: 73.749992
+      Offset: 0.000000
+      Reversed: false
+      Disabled: false
+      BlendMode: Default
+      ScaleMode: Multiply
+      PlaybackMode: Loop
+- !<SceneObject/4be19322-ad2e-4aa8-6e48-8bc574a3b64f>
+  PrefabRemaps:
+    []
+  Name: eyeR_end
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.669972, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<SceneObject/4d338f7f-5e58-42cf-7a49-37dbd8435c6b>
+  PrefabRemaps:
+    []
+  Name: neck3
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -0.000000, y: 1.234177, z: 0.000000}
+    Rotation: {x: 23.229326, y: -0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 8d7829f6-fac4-4681-4c03-0037e99afef8
+    - !<own> 1c2d6ca4-9210-45f9-6e1f-dcfe8531fb63
+    - !<own> c303168b-e9b2-4608-6ad5-e501a25e59bb
+  Components:
+    []
+- !<ScriptComponent/4da7e41c-9fb0-4d92-78ae-dd737eb053f3>
+  PrefabRemaps:
+    []
+  Name: freddy-eyes2
+  Enabled: true
+  ScriptAsset: !<reference> c0683b00-ada1-4869-905f-f85e6edf568e
+  ScriptInputsDefault:
+    {}
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      targetObject: !<reference.SceneObject> ea7571f0-b579-401b-775d-7a58e74a03c2
+      camera: !<reference.Camera> 00000000-0000-0065-0000-000000000065
+      additionalEulerRotation: !<Vec3> {x: 90.000000, y: 0.000000, z: 0.000000}
+  ScriptTypes:
+    "":
+      {}
+- !<ScriptComponent/51af26bb-f057-403a-496f-833a4b2b0841>
+  PrefabRemaps:
+    []
+  Name: Interactable
+  Enabled: true
+  ScriptAsset: !<reference> 044cc4c7-8847-4d19-af59-f7466e807b2a
+  ScriptInputsDefault:
+    targetingMode: true
+    targetingVisual: true
+    ignoreInteractionPlane: true
+    keepHoverOnTrigger: true
+    enableInstantDrag: true
+    isScrollable: true
+    allowMultipleInteractors: true
+    enablePokeDirectionality: true
+    acceptableXDirections: true
+    acceptableYDirections: true
+    acceptableZDirections: true
+    useFilteredPinch: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      targetingMode: !<float> 3.000000
+      targetingVisual: !<float> 1.000000
+      ignoreInteractionPlane: false
+      keepHoverOnTrigger: false
+      enableInstantDrag: false
+      isScrollable: false
+      allowMultipleInteractors: true
+      enablePokeDirectionality: false
+      acceptableXDirections: !<float> 0.000000
+      acceptableYDirections: !<float> 0.000000
+      acceptableZDirections: !<float> 1.000000
+      useFilteredPinch: false
+  ScriptTypes:
+    "":
+      {}
+- !<SceneObject/51c4e3c6-b2c9-4125-7b8a-04a938145db4>
+  PrefabRemaps:
+    []
+  Name: rocketconnector2L
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -0.000000, y: 1.336461, z: -0.000000}
+    Rotation: {x: -40.122364, y: 0.324922, z: 0.889739}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> d897b9aa-9edb-475c-54bd-d36341037963
+  Components:
+    []
+- !<SceneObject/554b05b2-bb33-4f05-7830-72ea1863c547>
+  PrefabRemaps:
+    []
+  Name: Armature
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -0.000000, y: -215.108734, z: -21.510872}
+    Rotation: {x: -90.000000, y: 21.978350, z: 0.000000}
+    Scale: {x: 100.000000, y: 100.000000, z: 100.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 9b62732d-8166-46e9-4294-9055b1e1cc15
+  Components:
+    - !<own> fbedaabf-82ce-442b-4d85-29f2c32d1ec8
+- !<RenderMeshVisual/55f89596-bfe9-4a9b-7a85-8634d7347a34>
+  PrefabRemaps:
+    []
+  Name: component_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 81789a53-cdf4-4092-bccb-2c74bbc54dc9
+  Mesh: !<reference> 8e21e333-2200-43df-b6f2-1c272463cf00
+  Skin: !<reference> 60bad79d-2fe0-4f86-6b64-930c5d2482df
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/57293b59-324e-4abf-75a2-dbf7a783268c>
+  PrefabRemaps:
+    []
+  Name: tail2
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 1.414010, z: 0.000000}
+    Rotation: {x: 11.685201, y: 0.000000, z: -0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> c975870c-09d9-45f0-5bee-47ffb3a7d354
+  Components:
+    []
+- !<ColliderComponent/57a79e63-eb72-4d9a-6dd8-daa70b91da55>
+  PrefabRemaps:
+    []
+  Name: Physics Collider
+  Enabled: true
+  Shape: !<Sphere>
+    FitVisual: false
+    Radius: 8.000000
+  Matter: !<reference> 00000000-0000-0000-0000-000000000000
+  Filter: !<reference> 00000000-0000-0000-0000-000000000000
+  OverlapFilter: !<reference> 00000000-0000-0000-0000-000000000000
+  WorldSettings: !<reference> 00000000-0000-0000-0000-000000000000
+  EnableSmoothing: false
+  PositionTension: 30.000000
+  RotationTension: 30.000000
+  ForceCompound: false
+  Intangible: false
+  ShowCollider: false
+- !<Skin/60bad79d-2fe0-4f86-6b64-930c5d2482df>
+  PrefabRemaps:
+    []
+  Name: component_10
+  Enabled: true
+  skinBones:
+    Armature: !<reference> 554b05b2-bb33-4f05-7830-72ea1863c547
+    Plane: !<reference> e447ef2c-da53-4930-6881-14ef8e402e4e
+    beak-bottom: !<reference> 1a9e4bff-d189-460a-6466-01f4c1b424d8
+    beak-bottom_end: !<reference> 85ce2bcc-75be-479d-45b0-58208003a31e
+    beak-top: !<reference> 45a999f3-552f-4fb7-5b30-4baaf4cc864b
+    beak-top_end: !<reference> c93b50c7-b44b-4667-7418-d9e18d5496f6
+    connector-beak: !<reference> 8d7829f6-fac4-4681-4c03-0037e99afef8
+    eyeL: !<reference> 728bb39e-4fef-41f6-7e6d-25eef77a095d
+    eyeL-connector: !<reference> 1c2d6ca4-9210-45f9-6e1f-dcfe8531fb63
+    eyeL_end: !<reference> 32b0c326-b96c-4fd0-77c6-2fae48817078
+    eyeR: !<reference> ea7571f0-b579-401b-775d-7a58e74a03c2
+    eyeR-connector: !<reference> c303168b-e9b2-4608-6ad5-e501a25e59bb
+    eyeR_end: !<reference> 4be19322-ad2e-4aa8-6e48-8bc574a3b64f
+    freddy3: !<reference> e20ef274-99f2-4f3c-71e5-006cd4add200
+    neck1: !<reference> 76b29831-7d98-4381-41b0-e79568e88cd5
+    neck2: !<reference> c9428ff6-5612-4e82-4a0c-7bf596e6f4fa
+    neck3: !<reference> 4d338f7f-5e58-42cf-7a49-37dbd8435c6b
+    rocketL: !<reference> d897b9aa-9edb-475c-54bd-d36341037963
+    rocketL_end: !<reference> 3392e0c8-42c9-4cfc-6b95-bfe91d5b155b
+    rocketR: !<reference> f58bca21-7f47-45f3-5c22-9bd8cc39d92e
+    rocketR_end: !<reference> faf0bcf6-8510-4fa9-6822-9249245d7419
+    rocketconnector1L: !<reference> 3c5e52e5-3347-4720-6f1c-4fae145ea8b9
+    rocketconnector1R: !<reference> 8eb3890f-0f36-41f3-746b-cc87a2c666d5
+    rocketconnector2L: !<reference> 51c4e3c6-b2c9-4125-7b8a-04a938145db4
+    rocketconnector2R: !<reference> a7986693-6b30-490e-60b1-70cd61ef99d6
+    root: !<reference> 9b62732d-8166-46e9-4294-9055b1e1cc15
+    tail1: !<reference> 1da41738-0358-4cf2-6b45-9c63419485b6
+    tail2: !<reference> 57293b59-324e-4abf-75a2-dbf7a783268c
+    tail3: !<reference> c975870c-09d9-45f0-5bee-47ffb3a7d354
+    tail3_end: !<reference> 222e959b-67d1-4b84-66b7-cf5af5530c50
+    to-legL: !<reference> fa6fe44d-2497-4838-66d9-02463036340e
+    to-legL_end: !<reference> 6e2ccf3e-2048-44f7-5df3-2f39a1a78c07
+    to-legR: !<reference> a2aea10f-cbb7-4cc8-6786-6cbab24271d0
+    to-legR_end: !<reference> 8aa86dce-535e-414f-4c5e-a5eeee958412
+- !<RenderMeshVisual/6262b9bb-9545-47e2-4623-9557b2180f0f>
+  PrefabRemaps:
+    []
+  Name: component_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> af5535e0-131e-4228-b1d1-6fe8f77b6954
+  Mesh: !<reference> c951f5c6-66c2-43e9-b9af-b35cc0bdc6f9
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/6e23adf1-5116-4337-539e-c5aa93dc4c9c>
+  PrefabRemaps:
+    []
+  Name: Freddy Bird
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> e20ef274-99f2-4f3c-71e5-006cd4add200
+    - !<own> 1f64953c-b2b9-4e28-46be-40c69fe76c8e
+  Components:
+    - !<own> 57a79e63-eb72-4d9a-6dd8-daa70b91da55
+    - !<own> 51af26bb-f057-403a-496f-833a4b2b0841
+    - !<own> 118415a1-1ed7-4b61-530c-5840ffdc18f9
+    - !<own> 838d0a27-a314-4173-62b2-837215309c09
+    - !<own> c4cd41d5-5588-4a79-5336-25e8d407e7b1
+- !<SceneObject/6e2ccf3e-2048-44f7-5df3-2f39a1a78c07>
+  PrefabRemaps:
+    []
+  Name: to-legL_end
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -0.218709, y: 1.153310, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> f6436f01-070c-4009-79f9-10ae29c68871
+  Components:
+    - !<own> 9b3623d7-2e5a-4527-7dda-8a97dd3bf9eb
+- !<SceneObject/728bb39e-4fef-41f6-7e6d-25eef77a095d>
+  PrefabRemaps:
+    []
+  Name: eyeL
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -0.000000, y: 0.705435, z: -0.000000}
+    Rotation: {x: -0.027688, y: 0.000113, z: 0.364554}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 32b0c326-b96c-4fd0-77c6-2fae48817078
+  Components:
+    []
+- !<SceneObject/73703d1f-418a-4043-4eeb-e7b3833a586d>
+  PrefabRemaps:
+    []
+  Name: TweenManager
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> eaa6ec69-d43c-42e1-6161-1471320c2f6d
+- !<SceneObject/76b29831-7d98-4381-41b0-e79568e88cd5>
+  PrefabRemaps:
+    []
+  Name: neck1
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 1.000000, z: 0.000000}
+    Rotation: {x: 25.906507, y: 0.000012, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> c9428ff6-5612-4e82-4a0c-7bf596e6f4fa
+  Components:
+    []
+- !<SceneObject/81a201fd-2a9b-44c2-70a0-9eb92e88c698>
+  PrefabRemaps:
+    []
+  Name: legL-end
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.871936, y: -0.000001, z: -6.190714}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<ScriptComponent/83518e50-516c-496a-594f-5d33324a753a>
+  PrefabRemaps:
+    []
+  Name: freddy-eyes2
+  Enabled: true
+  ScriptAsset: !<reference> c0683b00-ada1-4869-905f-f85e6edf568e
+  ScriptInputsDefault:
+    {}
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      targetObject: !<reference.SceneObject> 728bb39e-4fef-41f6-7e6d-25eef77a095d
+      camera: !<reference.Camera> 00000000-0000-0065-0000-000000000065
+      additionalEulerRotation: !<Vec3> {x: 90.000000, y: 0.000000, z: 0.000000}
+  ScriptTypes:
+    "":
+      {}
+- !<ScriptComponent/838d0a27-a314-4173-62b2-837215309c09>
+  PrefabRemaps:
+    []
+  Name: InteractableOutlineFeedback
+  Enabled: false
+  ScriptAsset: !<reference> 2e8cb192-6f60-47ba-9f9f-5edf8786350a
+  ScriptInputsDefault:
+    hoveringColor: true
+    activatingColor: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      targetOutlineMaterial: !<reference.Material> ceac2aa2-5f11-42fa-afba-7a26d2c5a64d
+      hoveringColor: !<Vec4> {x: 1.000000, y: 1.000000, z: 0.040000, w: 1.000000}
+      activatingColor: !<Vec4> {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      outlineWeight: 0.075000
+      meshVisuals: !<reference.RenderMeshVisual[]>
+        - !<reference> 4cd57fb9-6e34-4201-9750-81f4744fbf3d
+  ScriptTypes:
+    "":
+      {}
+- !<ObjectPrefabAssetData/84975ed1-9ce4-4295-8326-b4cc566d0242>
+  Prototype: !<ObjectOwner/37c52d73-c634-4d78-b169-be222570175b>
+    PackagePath: ""
+    objects:
+      - !<own> abbd4de4-d425-4637-72d9-fc3ac525343b
+- !<SceneObject/85ce2bcc-75be-479d-45b0-58208003a31e>
+  PrefabRemaps:
+    []
+  Name: beak-bottom_end
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 4.392249, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<SceneObject/8aa86dce-535e-414f-4c5e-a5eeee958412>
+  PrefabRemaps:
+    []
+  Name: to-legR_end
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 1.589266, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> ceef232f-f2e7-4c04-6904-f325e4307b9b
+  Components:
+    - !<own> dc1002db-ef9e-45d5-4655-b96560d0d2e8
+- !<RenderMeshVisual/8aad6709-c2ba-4fce-4ee7-a71f64b1931f>
+  PrefabRemaps:
+    []
+  Name: component_8
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 9165a478-11d2-4a5a-a303-e6faf50590cd
+  Mesh: !<reference> 02c623b9-99c9-46ac-93fb-19ae9a21d71f
+  Skin: !<reference> 60bad79d-2fe0-4f86-6b64-930c5d2482df
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/8d7829f6-fac4-4681-4c03-0037e99afef8>
+  PrefabRemaps:
+    []
+  Name: connector-beak
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 1.217324, z: 0.000000}
+    Rotation: {x: 82.502678, y: -0.000010, z: 0.000027}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 45a999f3-552f-4fb7-5b30-4baaf4cc864b
+    - !<own> 1a9e4bff-d189-460a-6466-01f4c1b424d8
+  Components:
+    []
+- !<SceneObject/8eb3890f-0f36-41f3-746b-cc87a2c666d5>
+  PrefabRemaps:
+    []
+  Name: rocketconnector1R
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 1.414010, z: 0.000000}
+    Rotation: {x: 40.122356, y: -0.324914, z: 90.889748}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> a7986693-6b30-490e-60b1-70cd61ef99d6
+  Components:
+    []
+- !<AnimationPlayer/90faa59f-a1f3-4d77-5f2f-4aad17c97f8b>
+  PrefabRemaps:
+    []
+  Name: component_11
+  Enabled: true
+  Autoplay: true
+  ClipRangeType: Frames
+  AnimationClips:
+    - !<AnimationClip>
+      AnimationAsset: !<reference> 4e917640-c062-4d1d-a8cc-6fa9e47b1385
+      Name: Armature|idle
+      Weight: 1.000000
+      PlaybackSpeed: 1.000000
+      Begin: 0.000000
+      End: 73.749992
+      Offset: 0.000000
+      Reversed: false
+      Disabled: true
+      BlendMode: Default
+      ScaleMode: Multiply
+      PlaybackMode: Loop
+    - !<AnimationClip>
+      AnimationAsset: !<reference> e34c7411-47f3-42ee-8dce-15deda260709
+      Name: Armature_talk
+      Weight: 1.000000
+      PlaybackSpeed: 1.000000
+      Begin: 0.000000
+      End: 73.749992
+      Offset: 0.000000
+      Reversed: false
+      Disabled: false
+      BlendMode: Default
+      ScaleMode: Multiply
+      PlaybackMode: Loop
+    - !<AnimationClip>
+      AnimationAsset: !<reference> cb7ef455-9db2-4bd4-b5bb-279e87bc5470
+      Name: Armature_listening
+      Weight: 1.000000
+      PlaybackSpeed: 1.000000
+      Begin: 0.000000
+      End: 73.749992
+      Offset: 0.000000
+      Reversed: false
+      Disabled: true
+      BlendMode: Default
+      ScaleMode: Multiply
+      PlaybackMode: Loop
+- !<ScriptComponent/99682e13-ce40-472f-713f-3cd9cccde083>
+  PrefabRemaps:
+    []
+  Name: TweenTransform
+  Enabled: true
+  ScriptAsset: !<reference> 69f5b463-24cb-4f50-ae8c-f12fed7a9459
+  ScriptInputsDefault:
+    playAutomatically: true
+    movementType: true
+    from: true
+    to: true
+    additive: true
+    delay: true
+    isLocal: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> f58bca21-7f47-45f3-5c22-9bd8cc39d92e
+      tweenName: rocketR
+      playAutomatically: true
+      loopType: 2
+      type: 2
+      movementType: 0
+      startInput: !<Vec3> {x: -89.960297, y: -33.202999, z: -1.401700}
+      endInput: !<Vec3> {x: -89.960602, y: 32.546299, z: -1.358700}
+      from: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
+      to: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
+      offset: !<Vec3> {x: 0.000000, y: 180.000000, z: 0.000000}
+      additive: false
+      time: 0.900000
+      delay: !<float> 0.000000
+      isLocal: true
+      easingFunction: Cubic
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
+- !<ScriptComponent/9b3623d7-2e5a-4527-7dda-8a97dd3bf9eb>
+  PrefabRemaps:
+    []
+  Name: ChainController
+  Enabled: true
+  ScriptAsset: !<reference> 4fb388be-3035-496f-81b2-3c9e5f935ab3
+  ScriptInputsDefault:
+    anchorCount: true
+    type: true
+    iterations: true
+    timeSpeed: true
+    isRelative: true
+    useCollider: true
+    collider: true
+    colliderForce: true
+    sizeMutiplier: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      joints: !<reference.SceneObject[]>
+        - !<reference> f6436f01-070c-4009-79f9-10ae29c68871
+        - !<reference> 1dbd31f6-c0f0-43c5-7153-2993bfabef70
+        - !<reference> 81a201fd-2a9b-44c2-70a0-9eb92e88c698
+        - !<reference> 81a201fd-2a9b-44c2-70a0-9eb92e88c698
+      anchorCount: 1
+      stiffness: 0.610000
+      type: 0
+      iterations: 1
+      timeSpeed: !<float> 1.000000
+      force: !<Vec3> {x: 0.000000, y: -0.800000, z: 0.000000}
+      isRelative: false
+      relativeTo: !<reference.SceneObject> 9f3a78a0-f82f-4d58-af1c-2d13fb5b706a
+      addRotation: true
+      useCollider: false
+      collider: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      colliderForce: !<float> 0.000000
+      sizeMutiplier: !<float> 6.000000
+  ScriptTypes:
+    "":
+      {}
+- !<SceneObject/9b62732d-8166-46e9-4294-9055b1e1cc15>
+  PrefabRemaps:
+    []
+  Name: root
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 90.000000, y: -0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 76b29831-7d98-4381-41b0-e79568e88cd5
+    - !<own> fa6fe44d-2497-4838-66d9-02463036340e
+    - !<own> a2aea10f-cbb7-4cc8-6786-6cbab24271d0
+    - !<own> 1da41738-0358-4cf2-6b45-9c63419485b6
+  Components:
+    []
+- !<SceneObject/a2aea10f-cbb7-4cc8-6786-6cbab24271d0>
+  PrefabRemaps:
+    []
+  Name: to-legR
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 1.000000, z: 0.000000}
+    Rotation: {x: -0.000000, y: -0.000000, z: 153.358109}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 8aa86dce-535e-414f-4c5e-a5eeee958412
+  Components:
+    []
+- !<SceneObject/a7986693-6b30-490e-60b1-70cd61ef99d6>
+  PrefabRemaps:
+    []
+  Name: rocketconnector2R
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 1.336461, z: -0.000000}
+    Rotation: {x: -40.122364, y: -0.324922, z: -0.889739}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> f58bca21-7f47-45f3-5c22-9bd8cc39d92e
+  Components:
+    []
+- !<SceneObject/abbd4de4-d425-4637-72d9-fc3ac525343b>
+  PrefabRemaps:
+    []
+  Name: freddyBird2
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 6e23adf1-5116-4337-539e-c5aa93dc4c9c
+    - !<own> 73703d1f-418a-4043-4eeb-e7b3833a586d
+  Components:
+    []
+- !<RenderMeshVisual/bae1abea-71e9-4c62-5489-5290ed1c143b>
+  PrefabRemaps:
+    []
+  Name: component_6
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 35f17253-8194-460f-8ac8-2725f38023fe
+  Mesh: !<reference> bb2613cc-2706-40f9-be1e-e2681226d17e
+  Skin: !<reference> 60bad79d-2fe0-4f86-6b64-930c5d2482df
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/c303168b-e9b2-4608-6ad5-e501a25e59bb>
+  PrefabRemaps:
+    []
+  Name: eyeR-connector
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 1.217324, z: 0.000000}
+    Rotation: {x: 0.027674, y: -0.000085, z: 90.364548}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> ea7571f0-b579-401b-775d-7a58e74a03c2
+  Components:
+    []
+- !<ScriptComponent/c4cd41d5-5588-4a79-5336-25e8d407e7b1>
+  PrefabRemaps:
+    []
+  Name: InteractableAudioFeedback
+  Enabled: false
+  ScriptAsset: !<reference> be46881d-10fd-4e9a-bb33-55bb941ef766
+  ScriptInputsDefault:
+    _hoverAudioTrack: true
+    _playAudioOnTriggerStart: true
+    _triggerStartAudioTrack: true
+    _playAudioOnTriggerEnd: true
+    _triggerEndAudioTrack: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      _playAudioOnHover: true
+      _hoverAudioTrack: !<reference.AudioTrackAsset> 7d5ccea7-a688-4f11-8a33-b60a30a65de1
+      _playAudioOnTriggerStart: true
+      _triggerStartAudioTrack: !<reference.AudioTrackAsset> 05159291-e1bc-4873-9517-c9a287dfec16
+      _playAudioOnTriggerEnd: true
+      _triggerEndAudioTrack: !<reference.AudioTrackAsset> 89348d79-6386-4905-ab0b-f148911544c7
+  ScriptTypes:
+    "":
+      {}
+- !<ScriptComponent/c7d94475-d5e3-4f7e-4988-30eccbd0357a>
+  PrefabRemaps:
+    []
+  Name: TweenTransform
+  Enabled: true
+  ScriptAsset: !<reference> 69f5b463-24cb-4f50-ae8c-f12fed7a9459
+  ScriptInputsDefault:
+    playAutomatically: true
+    movementType: true
+    from: true
+    to: true
+    additive: true
+    delay: true
+    isLocal: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> d897b9aa-9edb-475c-54bd-d36341037963
+      tweenName: rocketL
+      playAutomatically: true
+      loopType: 2
+      type: 2
+      movementType: 0
+      startInput: !<Vec3> {x: -89.963600, y: -23.988899, z: 1.365200}
+      endInput: !<Vec3> {x: -89.963203, y: 25.325399, z: 1.395700}
+      from: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
+      to: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
+      offset: !<Vec3> {x: 0.000000, y: 180.000000, z: 0.000000}
+      additive: false
+      time: 0.900000
+      delay: !<float> 0.000000
+      isLocal: true
+      easingFunction: Cubic
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
+- !<SceneObject/c93b50c7-b44b-4667-7418-d9e18d5496f6>
+  PrefabRemaps:
+    []
+  Name: beak-top_end
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 5.634020, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<SceneObject/c9428ff6-5612-4e82-4a0c-7bf596e6f4fa>
+  PrefabRemaps:
+    []
+  Name: neck2
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -0.000000, y: 1.195702, z: 0.000000}
+    Rotation: {x: -37.817123, y: -0.000000, z: -0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 4d338f7f-5e58-42cf-7a49-37dbd8435c6b
+  Components:
+    []
+- !<SceneObject/c975870c-09d9-45f0-5bee-47ffb3a7d354>
+  PrefabRemaps:
+    []
+  Name: tail3
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.952080, z: -0.000000}
+    Rotation: {x: 22.901737, y: 0.000000, z: -0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 222e959b-67d1-4b84-66b7-cf5af5530c50
+  Components:
+    []
+- !<SceneObject/ceef232f-f2e7-4c04-6904-f325e4307b9b>
+  PrefabRemaps:
+    []
+  Name: footR 1
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.516162, y: -2.618138, z: -0.202839}
+    Rotation: {x: 0.000000, y: 0.000000, z: -153.358124}
+    Scale: {x: 0.010000, y: 0.010000, z: 0.010000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 2e143daf-37a6-4276-5e1b-0d63bb4ef51b
+  Components:
+    []
+- !<ScriptComponent/d4f4b612-790a-4a7b-7008-d473e3fa48ed>
+  PrefabRemaps:
+    []
+  Name: freddy-eyes2
+  Enabled: false
+  ScriptAsset: !<reference> c0683b00-ada1-4869-905f-f85e6edf568e
+  ScriptInputsDefault:
+    {}
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      targetObject: !<reference.SceneObject> 729095dd-fe11-49ba-8275-fb749fb7a46f
+      camera: !<reference.Camera> 00000000-0000-0065-0000-000000000065
+      additionalEulerRotation: !<Vec3> {x: 45.000000, y: 0.000000, z: 0.000000}
+  ScriptTypes:
+    "":
+      {}
+- !<SceneObject/d897b9aa-9edb-475c-54bd-d36341037963>
+  PrefabRemaps:
+    []
+  Name: rocketL
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 1.306573, z: -0.000000}
+    Rotation: {x: -89.966743, y: 1.379953, z: 1.380759}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 3392e0c8-42c9-4cfc-6b95-bfe91d5b155b
+    - !<own> e9efd74f-56b5-4412-4030-719b7aa6f4a4
+  Components:
+    - !<own> c7d94475-d5e3-4f7e-4988-30eccbd0357a
+- !<ScriptComponent/dc1002db-ef9e-45d5-4655-b96560d0d2e8>
+  PrefabRemaps:
+    []
+  Name: ChainController
+  Enabled: true
+  ScriptAsset: !<reference> 4fb388be-3035-496f-81b2-3c9e5f935ab3
+  ScriptInputsDefault:
+    anchorCount: true
+    type: true
+    iterations: true
+    isRelative: true
+    useCollider: true
+    collider: true
+    colliderForce: true
+    sizeMutiplier: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      joints: !<reference.SceneObject[]>
+        - !<reference> ceef232f-f2e7-4c04-6904-f325e4307b9b
+        - !<reference> 2e143daf-37a6-4276-5e1b-0d63bb4ef51b
+        - !<reference> 41ceeaae-bcde-4e09-786d-4aa626c27081
+        - !<reference> 41ceeaae-bcde-4e09-786d-4aa626c27081
+      anchorCount: 1
+      stiffness: 0.910000
+      type: 0
+      iterations: 1
+      timeSpeed: 1.010000
+      force: !<Vec3> {x: -0.200000, y: -1.000000, z: 0.000000}
+      isRelative: false
+      relativeTo: !<reference.SceneObject> 9f3a78a0-f82f-4d58-af1c-2d13fb5b706a
+      addRotation: true
+      useCollider: false
+      collider: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      colliderForce: !<float> 0.000000
+      sizeMutiplier: !<float> 6.000000
+  ScriptTypes:
+    "":
+      {}
+- !<RenderMeshVisual/dfd2b666-4043-4ab9-68ab-e0305d1c73b8>
+  PrefabRemaps:
+    []
+  Name: component_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 70b45cc2-22a2-4173-96d3-26dd3e9af583
+  Mesh: !<reference> 7797a25b-d3e5-43da-88f6-609ac9283ee3
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<RenderMeshVisual/e01d25c0-8c0c-4b4f-6217-e6fdd7f93140>
+  PrefabRemaps:
+    []
+  Name: component_4
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 07ef1337-df44-4901-87c1-934b0814bf5c
+  Mesh: !<reference> 6060600f-9767-4507-99a6-dacd7ba0fbde
+  Skin: !<reference> 60bad79d-2fe0-4f86-6b64-930c5d2482df
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/e20ef274-99f2-4f3c-71e5-006cd4add200>
+  PrefabRemaps:
+    []
+  Name: freddy3
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 0.015000, y: 0.015000, z: 0.015000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 554b05b2-bb33-4f05-7830-72ea1863c547
+    - !<own> e447ef2c-da53-4930-6881-14ef8e402e4e
+  Components:
+    - !<own> 60bad79d-2fe0-4f86-6b64-930c5d2482df
+    - !<own> 4a66f96e-0819-4e69-5c03-32b49cc0c8ea
+    - !<own> 90faa59f-a1f3-4d77-5f2f-4aad17c97f8b
+- !<SceneObject/e447ef2c-da53-4930-6881-14ef8e402e4e>
+  PrefabRemaps:
+    []
+  Name: Plane
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 906.245544}
+    Rotation: {x: -90.000000, y: -0.000000, z: 0.000000}
+    Scale: {x: 46.324383, y: 46.324383, z: 46.324383}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 55f89596-bfe9-4a9b-7a85-8634d7347a34
+    - !<own> f68c8dee-bb2d-4e36-6d01-e882ad758acc
+    - !<own> e01d25c0-8c0c-4b4f-6217-e6fdd7f93140
+    - !<own> bae1abea-71e9-4c62-5489-5290ed1c143b
+    - !<own> 8aad6709-c2ba-4fce-4ee7-a71f64b1931f
+- !<SceneObject/e9efd74f-56b5-4412-4030-719b7aa6f4a4>
+  PrefabRemaps:
+    []
+  Name: GPU Particles Trails 1
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -0.036457, y: 1.482909, z: -0.011781}
+    Rotation: {x: -0.000031, y: -0.000063, z: 23.945486}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 49c51d92-5e0c-4ceb-5d42-612595477d96
+- !<SceneObject/ea7571f0-b579-401b-775d-7a58e74a03c2>
+  PrefabRemaps:
+    []
+  Name: eyeR
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.705435, z: -0.000000}
+    Rotation: {x: -0.027687, y: -0.000086, z: -0.364554}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 4be19322-ad2e-4aa8-6e48-8bc574a3b64f
+  Components:
+    []
+- !<ScriptComponent/eaa6ec69-d43c-42e1-6161-1471320c2f6d>
+  PrefabRemaps:
+    []
+  Name: TweenManager
+  Enabled: true
+  ScriptAsset: !<reference> cfcc380a-8b01-448d-bdba-2e56f3970662
+  ScriptInputsDefault:
+    printDebugLog: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      printDebugLog: false
+  ScriptTypes:
+    "":
+      {}
+- !<SceneObject/f58bca21-7f47-45f3-5c22-9bd8cc39d92e>
+  PrefabRemaps:
+    []
+  Name: rocketR
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -0.000000, y: 1.306573, z: -0.000000}
+    Rotation: {x: -89.960556, y: 32.546345, z: -1.358732}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> faf0bcf6-8510-4fa9-6822-9249245d7419
+    - !<own> 1c2c0c0d-c9d6-4296-4c2a-216c99c08bc3
+  Components:
+    - !<own> 99682e13-ce40-472f-713f-3cd9cccde083
+- !<SceneObject/f6436f01-070c-4009-79f9-10ae29c68871>
+  PrefabRemaps:
+    []
+  Name: footL 1
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -0.516162, y: -2.618138, z: -0.121616}
+    Rotation: {x: 0.000000, y: -0.000000, z: 153.358124}
+    Scale: {x: 0.010000, y: 0.010000, z: 0.010000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 1dbd31f6-c0f0-43c5-7153-2993bfabef70
+  Components:
+    []
+- !<RenderMeshVisual/f68c8dee-bb2d-4e36-6d01-e882ad758acc>
+  PrefabRemaps:
+    []
+  Name: component_2
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 4219dd59-c0b1-4363-8dfc-49d4282787cd
+  Mesh: !<reference> ef8f715b-c6f0-4cba-8727-09d048a92aa2
+  Skin: !<reference> 60bad79d-2fe0-4f86-6b64-930c5d2482df
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/fa6fe44d-2497-4838-66d9-02463036340e>
+  PrefabRemaps:
+    []
+  Name: to-legL
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 1.000000, z: 0.000000}
+    Rotation: {x: -0.000000, y: 0.000000, z: -153.358109}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 6e2ccf3e-2048-44f7-5df3-2f39a1a78c07
+  Components:
+    []
+- !<SceneObject/faf0bcf6-8510-4fa9-6822-9249245d7419>
+  PrefabRemaps:
+    []
+  Name: rocketR_end
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 2.472076, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<ScriptComponent/fbedaabf-82ce-442b-4d85-29f2c32d1ec8>
+  PrefabRemaps:
+    []
+  Name: TweenTransform
+  Enabled: true
+  ScriptAsset: !<reference> 69f5b463-24cb-4f50-ae8c-f12fed7a9459
+  ScriptInputsDefault:
+    playAutomatically: true
+    movementType: true
+    from: true
+    to: true
+    additive: true
+    delay: true
+    isLocal: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      sceneObjectReference: !<reference.SceneObject> 554b05b2-bb33-4f05-7830-72ea1863c547
+      tweenName: bird-side-side
+      playAutomatically: true
+      loopType: 2
+      type: 2
+      movementType: 0
+      startInput: !<Vec3> {x: -90.000000, y: 21.978300, z: 0.000000}
+      endInput: !<Vec3> {x: -90.000000, y: -21.978300, z: 0.000000}
+      from: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
+      to: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
+      offset: !<Vec3> {x: 0.000000, y: 180.000000, z: 0.000000}
+      additive: false
+      time: 1.200000
+      delay: !<float> 0.000000
+      isLocal: true
+      easingFunction: Cubic
+      easingType: InOut
+  ScriptTypes:
+    "":
+      {}
