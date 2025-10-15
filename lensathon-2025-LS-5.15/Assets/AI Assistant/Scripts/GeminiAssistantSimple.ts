@@ -380,6 +380,9 @@ When analyzing the camera feed, look for distinctive architectural features, scu
         // Determine if the response is complete
         else if (message?.serverContent?.turnComplete) {
           completedTextDisplay = true;
+          // Add 3 seconds buffer after turn complete to ensure all audio finishes
+          this.talkingEndTime = Math.max(this.talkingEndTime, getTime() + 3.0);
+          print(`⏱️ Turn complete, added 3s buffer. End time: ${this.talkingEndTime.toFixed(1)}`);
           // Start monitoring for when talking should end
           this.startTalkingDurationMonitor();
         }
@@ -527,11 +530,11 @@ When analyzing the camera feed, look for distinctive architectural features, scu
     // Count words (split by whitespace)
     const wordCount = text.trim().split(/\s+/).length;
     
-    // Estimate duration: words / 2.5 words per second + 0.5s buffer
-    const baseDuration = (wordCount / 2.5) + 0.5;
+    // Estimate duration: words / 2.5 words per second + 1s buffer
+    const baseDuration = (wordCount / 2.5) + 1.0;
     
-    // Multiply by 3.5x to ensure animation lasts through entire speech
-    const estimatedDuration = baseDuration * 3.5;
+    // Multiply by 5x to ensure animation lasts through entire speech with plenty of buffer
+    const estimatedDuration = baseDuration * 4.0;
     
     // Update the end time (keep extending it as more text arrives)
     this.talkingEndTime = Math.max(this.talkingEndTime, getTime() + estimatedDuration);

@@ -5630,6 +5630,7 @@
     idleAnimationName: true
     listeningAnimationName: true
     talkingAnimationName: true
+    audioThreshold: true
     silenceTimeout: true
   ScriptTypesDefault:
     {}
@@ -5646,7 +5647,7 @@
       haveVideoInput: true
       haveAudioOutput: true
       voice: Fenrir
-      audioThreshold: 0.013000
+      audioThreshold: 0.020000
       silenceTimeout: !<float> 2.000000
   ScriptTypes:
     "":
